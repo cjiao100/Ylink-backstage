@@ -38,7 +38,9 @@
             </el-form-item>
           </el-form>
           <div>
-            <el-button class="login-button" type="primary">登录</el-button>
+            <el-button class="login-button" type="primary" @click="login">
+              登录
+            </el-button>
           </div>
         </el-col>
       </el-row>
@@ -53,6 +55,13 @@ export default {
     return {
       loginForm: {}
     };
+  },
+  methods: {
+    login() {
+      console.log(this.loginForm);
+      // this.$route.push("/");
+      this.$router.push("/");
+    }
   }
 };
 </script>
