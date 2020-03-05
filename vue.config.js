@@ -1,3 +1,9 @@
+const path = require("path");
+
+function resolve(dir) {
+  return path.join(__dirname, dir);
+}
+
 module.exports = {
   // 选项...
   publicPath: "/",
@@ -23,6 +29,14 @@ module.exports = {
   outputDir: "dist", //打包之后所在目录， 默认值 dist
   assetsDir: "assets", //静态资源打包之后 存放路径 ，（相对于outputDir指定的路径）, 默认值 ‘‘
   indexPath: "index.html", //index.html 主页面打包之后存放的目录（相对于outputDir指定的路径），默认值 index.html
-  productionSourceMap: true //打包时不会生成 .map 文件，加快打包速度
+  productionSourceMap: true, //打包时不会生成 .map 文件，加快打包速度
   //filenameHashing: false, 打包时，静态文件不会生成hash值，一般不要这个
+  configureWebpack: {
+    name: "YLink",
+    resolve: {
+      alias: {
+        "@": resolve("src")
+      }
+    }
+  }
 };
