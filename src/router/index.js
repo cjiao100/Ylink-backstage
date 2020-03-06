@@ -8,7 +8,14 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: Home,
+    children: [
+      {
+        path: "workbench",
+        name: "工作台",
+        component: () => <p>工作台</p>
+      }
+    ]
   },
   {
     path: "/login",

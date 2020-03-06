@@ -1,10 +1,11 @@
 <template>
-  <div>
+  <div class="home-container">
     <Header />
-    <div class="content">
-      <Menu class="nav-menu" />
-      <div>
-        <Breadcrumb />
+    <Menu class="nav-menu" />
+    <div class="container">
+      <Breadcrumb class="nav" />
+      <div class="content">
+        <router-view></router-view>
       </div>
     </div>
   </div>
@@ -25,16 +26,34 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.content {
-  margin-top: 60px;
-  margin-left: 200px;
-  display: flex;
+.home-container {
+  padding-top: 60px;
+
   .nav-menu {
     width: 200px;
     height: 100vh;
-    box-shadow: 2px 0px 5px 0px #e4e4e4;
     position: fixed;
     left: 0;
+    border: none;
+  }
+
+  .container {
+    margin-left: 200px;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 60px);
+    background-color: #f8f9fe;
+
+    .nav {
+      padding: 10px 20px;
+      background-color: #fdfdfe;
+      position: sticky;
+    }
+
+    .content {
+      padding: 20px;
+      // flex: 1;
+    }
   }
 }
 </style>
