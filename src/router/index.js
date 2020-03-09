@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import Home from "@/views/Home.vue";
 
 Vue.use(VueRouter);
 
@@ -11,9 +11,9 @@ const routes = [
     component: Home,
     children: [
       {
-        path: "workbench",
+        path: "/workbench",
         name: "工作台",
-        component: () => <p>工作台</p>
+        component: () => import("@/views/workbench/Workbench.vue")
       }
     ]
   },
