@@ -47,11 +47,13 @@ export default {
     .nav {
       padding: 10px 20px;
       background-color: #fdfdfe;
-      position: sticky;
+      position: fixed;
+      width: calc(100vw - 200px);
+      z-index: 1;
     }
 
     .content {
-      padding: 20px;
+      padding: 55px 20px 20px;
       // flex: 1;
     }
   }

@@ -74,15 +74,31 @@
           </div>
           <div>
             <ul class="todo-list">
-              <li v-for="i in 10" :key="i">
-                <p>
+              <li v-for="i in 6" :key="i">
+                <div>
                   <el-tag effect="dark" type="warning" size="mini">
                     待审核
                   </el-tag>
-                  <span class="message"
-                    >XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span
-                  >
-                </p>
+                  <span class="message">
+                    代办事项代办事项代办事项代办事项代办事项代办事项代办事项代办事项代办事项
+                  </span>
+                  <!-- <el-button-group> -->
+                  <!-- </el-button-group> -->
+                  <el-button
+                    type="primary"
+                    size="mini"
+                    icon="el-icon-check"
+                    circle
+                    plain
+                  ></el-button>
+                  <el-button
+                    type="danger"
+                    size="mini"
+                    icon="el-icon-close"
+                    circle
+                    plain
+                  ></el-button>
+                </div>
               </li>
             </ul>
             <div class="btn-group">
@@ -126,14 +142,6 @@ export default {
         color: "#fff",
         padding: "25px 40px",
         boxSizing: "content-box"
-      },
-      chartData: {
-        columns: ["时间", "用户"],
-        rows: [
-          { 时间: "7：30", 用户: 32371 },
-          { 时间: "8：00", 用户: 12328 },
-          { 时间: "8：30", 用户: 92381 }
-        ]
       }
     };
   }
@@ -192,22 +200,28 @@ export default {
         padding: 0;
         margin: 0;
 
-        p {
+        div {
           margin: 0;
-          // line-height: 2;
-          margin-bottom: 15px;
+          margin-bottom: 30px;
+          display: flex;
 
           .message {
             margin-left: 10px;
-            font-size: $miniFont;
+            font-size: $smallFont;
+            line-height: 20px;
+            width: 75%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: inline-block;
+            word-break: keep-all;
           }
         }
       }
 
       .btn-group {
         text-align: right;
-        margin-top: 10px;
-        margin-bottom: -10px;
+        // margin-top: 10px;
+        // margin-bottom: -10px;
 
         .next-btn {
           padding: 3px 7px;

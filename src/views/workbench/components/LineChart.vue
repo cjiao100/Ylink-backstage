@@ -14,8 +14,18 @@ export default {
       width: "100%",
       chart: null,
       chartData: {
-        time: ["7:00", "7:30", "8:00", "8:30", "9:00", "9:30", "10:00"],
-        currentData: [120, 82, 91, 154, 162, 140, 145]
+        time: [
+          "7:00",
+          "7:30",
+          "8:00",
+          "8:30",
+          "9:00",
+          "9:30",
+          "10:00",
+          "10:30",
+          "11:00"
+        ],
+        currentData: [120, 82, 91, 154, 162, 140, 145, 120, 82, 91]
       }
     };
   },
@@ -84,7 +94,8 @@ export default {
                     colorStops: [
                       {
                         offset: 0,
-                        color: "#4b93fa"
+                        // color: "#4b93fa"
+                        color: "#6fa8fb"
                       },
                       {
                         offset: 1,

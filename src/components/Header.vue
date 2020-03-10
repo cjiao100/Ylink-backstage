@@ -39,7 +39,8 @@ export default {
   padding: 0 20px;
   position: fixed;
   top: 0;
-  z-index: 1;
+  z-index: 2;
+  background-color: #ffffff;
 
   .title {
     margin: 0;
