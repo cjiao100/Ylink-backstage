@@ -72,30 +72,53 @@
             >
             </el-button>
           </div>
-          <ul>
-            <li>
-              <p>
-                <el-tag effect="dark" type="warning">
-                  待审核
-                </el-tag>
-                <span>XXX</span>
-              </p>
-            </li>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
+          <div>
+            <ul class="todo-list">
+              <li v-for="i in 10" :key="i">
+                <p>
+                  <el-tag effect="dark" type="warning" size="mini">
+                    待审核
+                  </el-tag>
+                  <span class="message"
+                    >XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span
+                  >
+                </p>
+              </li>
+            </ul>
+            <div class="btn-group">
+              <el-button
+                class="next-btn"
+                icon="el-icon-arrow-left"
+                size="mini"
+              ></el-button>
+              <el-button
+                class="next-btn"
+                icon="el-icon-arrow-right"
+                size="mini"
+              ></el-button>
+            </div>
+          </div>
         </el-card>
       </el-col>
       <el-col :span="15">
-        <el-card class="message-card" shadow="nerver"></el-card>
+        <el-card class="message-card" shadow="nerver">
+          <div slot="header" class="card-header">
+            <span>实时在线人数</span>
+          </div>
+          <line-chart />
+        </el-card>
       </el-col>
     </el-row>
   </div>
 </template>
 
 <script>
+import LineChart from "./components/LineChart";
+
 export default {
+  components: {
+    LineChart
+  },
   data() {
     return {
       bodyStyle: {
@@ -103,6 +126,14 @@ export default {
         color: "#fff",
         padding: "25px 40px",
         boxSizing: "content-box"
+      },
+      chartData: {
+        columns: ["时间", "用户"],
+        rows: [
+          { 时间: "7：30", 用户: 32371 },
+          { 时间: "8：00", 用户: 12328 },
+          { 时间: "8：30", 用户: 92381 }
+        ]
       }
     };
   }
@@ -153,6 +184,35 @@ export default {
           font-size: 14px;
         }
       }
+
+      .todo-list {
+        height: 330px;
+        list-style: none;
+        text-align: left;
+        padding: 0;
+        margin: 0;
+
+        p {
+          margin: 0;
+          // line-height: 2;
+          margin-bottom: 15px;
+
+          .message {
+            margin-left: 10px;
+            font-size: $miniFont;
+          }
+        }
+      }
+
+      .btn-group {
+        text-align: right;
+        margin-top: 10px;
+        margin-bottom: -10px;
+
+        .next-btn {
+          padding: 3px 7px;
+        }
+      }
     }
   }
 }
@@ -166,6 +226,9 @@ export default {
 
   .el-card__header {
     border: none;
+  }
+  .el-card__body {
+    padding-top: 0;
   }
 }
 </style>
