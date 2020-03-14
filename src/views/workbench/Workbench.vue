@@ -125,15 +125,36 @@
         </el-card>
       </el-col>
     </el-row>
+
+    <el-row class="message-content" type="flex" justify="space-around">
+      <el-col :span="11">
+        <el-card class="message-card" shadow="nerver">
+          <div slot="header" class="card-header">
+            <span>今日热门文章</span>
+          </div>
+          <list />
+        </el-card>
+      </el-col>
+      <el-col :span="11">
+        <el-card class="message-card" shadow="nerver">
+          <div slot="header" class="card-header">
+            <span>今日热门帖子</span>
+          </div>
+          <list />
+        </el-card>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
 import LineChart from "./components/LineChart";
+import List from "./components/List";
 
 export default {
   components: {
-    LineChart
+    LineChart,
+    List
   },
   data() {
     return {
