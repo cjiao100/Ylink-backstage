@@ -132,7 +132,7 @@
           <div slot="header" class="card-header">
             <span>今日热门文章</span>
           </div>
-          <list />
+          <list :list="postList" />
         </el-card>
       </el-col>
       <el-col :span="11">
@@ -140,7 +140,7 @@
           <div slot="header" class="card-header">
             <span>今日热门帖子</span>
           </div>
-          <list />
+          <list :list="postList" />
         </el-card>
       </el-col>
     </el-row>
@@ -158,6 +158,43 @@ export default {
   },
   data() {
     return {
+      postList: [
+        {
+          id: 1,
+          title: "今日有一重大新闻",
+          author: "最多",
+          awesome: 10,
+          brower: 10
+        },
+        {
+          id: 1,
+          title: "今日有一重大新闻",
+          author: "最多",
+          awesome: 10,
+          brower: 10
+        },
+        {
+          id: 1,
+          title: "今日有一重大新闻",
+          author: "最多",
+          awesome: 10,
+          brower: 10
+        },
+        {
+          id: 1,
+          title: "今日有一重大新闻",
+          author: "最多",
+          awesome: 10,
+          brower: 10
+        },
+        {
+          id: 1,
+          title: "今日有一重大新闻",
+          author: "最多",
+          awesome: 10,
+          brower: 10
+        }
+      ],
       bodyStyle: {
         display: "flex",
         color: "#fff",

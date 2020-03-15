@@ -53,6 +53,7 @@ export default {
     }
 
     .content {
+      background-color: #f8f9fe;
       padding: 55px 20px 20px;
       // flex: 1;
     }

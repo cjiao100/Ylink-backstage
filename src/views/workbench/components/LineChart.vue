@@ -1,11 +1,13 @@
 <template>
-  <div :class="className" :style="{ height: height, width: width }" />
+  <!-- <div :class="className" :style="{ height: height, width: width }" /> -->
+  <ve-line
+    :data="chartData"
+    :settings="chartSettings"
+    :extend="extend"
+  ></ve-line>
 </template>
 
 <script>
-import echarts from "echarts";
-require("echarts/theme/macarons");
-
 export default {
   data() {
     return {
@@ -14,37 +16,54 @@ export default {
       width: "100%",
       chart: null,
       chartData: {
-        time: [
-          "7:00",
-          "7:30",
-          "8:00",
-          "8:30",
-          "9:00",
-          "9:30",
-          "10:00",
-          "10:30",
-          "11:00"
-        ],
-        currentData: [120, 82, 91, 154, 162, 140, 145, 120, 82, 91]
-      }
-    };
-  },
-  mounted() {
-    this.$nextTick(() => {
-      // console.log(this.$el);
-      this.initChart();
-    });
-  },
-  methods: {
-    initChart() {
-      this.chart = echarts.init(this.$el, "macarons");
-      // console.log(this.chart);
-      this.setOptions(this.chartData);
-    },
-    setOptions({ time, currentData } = {}) {
-      this.chart.setOption({
+        columns: ["时间", "当前在线人数"],
+        rows: [
+          { 时间: "6:30", 当前在线人数: "120" },
+          { 时间: "7:00", 当前在线人数: "82" },
+          { 时间: "7:30", 当前在线人数: "91" },
+          { 时间: "8:00", 当前在线人数: "154" },
+          { 时间: "8:30", 当前在线人数: "162" },
+          { 时间: "9:00", 当前在线人数: "140" },
+          { 时间: "9:30", 当前在线人数: "145" },
+          { 时间: "10:00", 当前在线人数: "120" },
+          { 时间: "10:30", 当前在线人数: "82" },
+          { 时间: "11:00", 当前在线人数: "91" }
+        ]
+      },
+      chartSettings: {
+        area: true,
+        itemStyle: {
+          normal: {
+            color: "#3888fa",
+            lineStyle: {
+              color: "#3888fa",
+              width: 2
+            },
+            areaStyle: {
+              color: {
+                type: "linear",
+                x: 0,
+                y: 0,
+                x2: 0,
+                y2: 1,
+                colorStops: [
+                  {
+                    offset: 0,
+                    color: "#6fa8fb"
+                  },
+                  {
+                    offset: 1,
+                    color: "rgba(255,255,255,0)"
+                  }
+                ],
+                global: false
+              }
+            }
+          }
+        }
+      },
+      extend: {
         xAxis: {
-          data: time,
           boundaryGap: false,
           axisTick: {
             show: false
@@ -60,7 +79,7 @@ export default {
         tooltip: {
           trigger: "axis",
           axisPointer: {
-            type: "cross"
+            type: "line"
           },
           padding: [5, 10]
         },
@@ -69,51 +88,16 @@ export default {
             show: false
           }
         },
-        legend: {
-          data: ["用户"]
-        },
-        series: [
-          {
-            name: "在线用户",
-            smooth: true,
-            type: "line",
-            itemStyle: {
-              normal: {
-                color: "#3888fa",
-                lineStyle: {
-                  color: "#3888fa",
-                  width: 2
-                },
-                areaStyle: {
-                  color: {
-                    type: "linear",
-                    x: 0,
-                    y: 0,
-                    x2: 0,
-                    y2: 1,
-                    colorStops: [
-                      {
-                        offset: 0,
-                        // color: "#4b93fa"
-                        color: "#6fa8fb"
-                      },
-                      {
-                        offset: 1,
-                        color: "rgba(255,255,255,0)"
-                      }
-                    ],
-                    global: false
-                  }
-                }
-              }
-            },
-            data: currentData,
-            animationDuration: 2800,
-            animationEasing: "quadraticOut"
-          }
-        ]
-      });
-    }
+        series(v) {
+          console.log(v);
+          v.forEach(i => {
+            i.animationDuration = 2800;
+            i.animationEasing = "quadraticOut";
+          });
+          return v;
+        }
+      }
+    };
   }
 };
 </script>

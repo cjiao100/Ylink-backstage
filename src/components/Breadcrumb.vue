@@ -25,6 +25,9 @@ export default {
   created() {
     this.getBreadcrumb();
   },
+  watch: {
+    $route: "getBreadcrumb"
+  },
   methods: {
     getBreadcrumb() {
       let matched = this.$route.matched.map(item => ({
@@ -32,7 +35,7 @@ export default {
         name: item.name
       }));
 
-      console.log(matched.shift());
+      matched.shift();
       this.matched = matched;
     }
   }

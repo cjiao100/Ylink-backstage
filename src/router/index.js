@@ -11,9 +11,29 @@ const routes = [
     component: Home,
     children: [
       {
-        path: "/workbench",
+        path: "",
         name: "工作台",
         component: () => import("@/views/workbench/Workbench.vue")
+      },
+      {
+        path: "user",
+        name: "用户管理",
+        component: () => import("@/views/user/User.vue")
+      },
+      {
+        path: "content/article",
+        name: "文章管理",
+        component: () => import("@/views/user/User.vue")
+      },
+      {
+        path: "content/post",
+        name: "帖子管理",
+        component: () => import("@/views/user/User.vue")
+      },
+      {
+        path: "space",
+        name: "个人空间",
+        component: () => import("@/views/space/Space.vue")
       }
     ]
   },
