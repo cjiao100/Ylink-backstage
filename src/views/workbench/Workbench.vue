@@ -242,6 +242,9 @@ export default {
       border: none;
 
       .card-header {
+        color: #333;
+        font-weight: 600;
+        font-size: 18px;
         text-align: left;
 
         .add-btn {

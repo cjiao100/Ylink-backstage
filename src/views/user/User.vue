@@ -32,16 +32,25 @@
         </el-col>
       </el-row>
     </el-col>
-    <el-col :span="7" style="background-color: #fff">321</el-col>
+    <el-col :span="7">
+      <el-card shadow="nerver">
+        <div slot="header" class="card-header">
+          <span>申请列表</span>
+        </div>
+        <apply-list />
+      </el-card>
+    </el-col>
   </el-row>
 </template>
 
 <script>
 import PieChart from "./components/PieChart";
+import ApplyList from "./components/ApplyList";
 
 export default {
   components: {
-    PieChart
+    PieChart,
+    ApplyList
   },
   data() {
     return {
@@ -75,7 +84,13 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.card-header {
+  color: #333;
+  font-weight: 600;
+  font-size: 18px;
+}
+</style>
 <style lang="scss">
 .user {
   .el-card {
