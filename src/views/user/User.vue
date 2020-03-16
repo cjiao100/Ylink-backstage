@@ -8,9 +8,12 @@
             shadow="never"
             :body-style="statisticsStyle"
           >
-            <div>
-              <p>平台现有用户数量</p>
-            </div>
+            <pie-chart
+              :chartTitle="this.active.title"
+              :label="this.active.label"
+              :level="this.active.level"
+              :rowsData="this.active.rowsData"
+            />
           </el-card>
         </el-col>
         <el-col :span="11">
@@ -19,9 +22,12 @@
             shadow="never"
             :body-style="statisticsStyle"
           >
-            <div>
-              <p>平台现有校园用户</p>
-            </div>
+            <pie-chart
+              :chartTitle="this.school.title"
+              :label="this.school.label"
+              :level="this.school.level"
+              :rowsData="this.school.rowsData"
+            />
           </el-card>
         </el-col>
       </el-row>
@@ -31,9 +37,34 @@
 </template>
 
 <script>
+import PieChart from "./components/PieChart";
+
 export default {
+  components: {
+    PieChart
+  },
   data() {
     return {
+      active: {
+        title: "平台活跃情况",
+        label: { type: "类型", num: "人数" },
+        level: [["全部用户"], ["活跃用户", "其他用户"]],
+        rowsData: [
+          { type: "全部用户", num: 4923 },
+          { type: "活跃用户", num: 1393 },
+          { type: "其他用户", num: 3530 }
+        ]
+      },
+      school: {
+        title: "平台现有校园用户",
+        label: { type: "类型", num: "人数" },
+        level: [["校园用户"], ["学生", "老师"]],
+        rowsData: [
+          { type: "校园用户", num: 1393 },
+          { type: "老师", num: 69 },
+          { type: "学生", num: 1324 }
+        ]
+      },
       statisticsStyle: {
         width: "100%",
         display: "flex",

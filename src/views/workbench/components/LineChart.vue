@@ -4,6 +4,8 @@
     :data="chartData"
     :settings="chartSettings"
     :extend="extend"
+    :height="height"
+    :width="width"
   ></ve-line>
 </template>
 
@@ -89,7 +91,6 @@ export default {
           }
         },
         series(v) {
-          console.log(v);
           v.forEach(i => {
             i.animationDuration = 2800;
             i.animationEasing = "quadraticOut";
