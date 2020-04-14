@@ -1,0 +1,73 @@
+Date : 2020-03-31 22:25:13
+Directory : /home/cjw/dev/code/Ylink-backstage
+Total : 31 files,  1943 codes, 73 comments, 252 blanks, all 2268 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| Vue        |         13 |      1,110 |         16 |         81 |      1,207 |
+| SCSS       |          9 |        617 |         40 |        147 |        804 |
+| JavaScript |          6 |        124 |         16 |         16 |        156 |
+| JSON       |          1 |         57 |          0 |          1 |         58 |
+| Markdown   |          1 |         19 |          0 |          6 |         25 |
+| HTML       |          1 |         16 |          1 |          1 |         18 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                            | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                               |         31 |      1,943 |         73 |        252 |      2,268 |
+| public                                                                          |          1 |         16 |          1 |          1 |         18 |
+| src                                                                             |         26 |      1,798 |         70 |        240 |      2,108 |
+| src/components                                                                  |          3 |        164 |          0 |         14 |        178 |
+| src/plugins                                                                     |          1 |          4 |          0 |          2 |          6 |
+| src/router                                                                      |          1 |         44 |         13 |          2 |         59 |
+| src/store                                                                       |          1 |          9 |          0 |          3 |         12 |
+| src/styles                                                                      |          8 |        614 |         34 |        144 |        792 |
+| src/views                                                                       |          9 |        931 |         16 |         65 |      1,012 |
+| src/views/space                                                                 |          1 |          7 |          0 |          3 |         10 |
+| src/views/user                                                                  |          3 |        327 |         11 |         20 |        358 |
+| src/views/user/components                                                       |          2 |        226 |         11 |         16 |        253 |
+| src/views/workbench                                                             |          3 |        413 |          2 |         26 |        441 |
+| src/views/workbench/components                                                  |          2 |        125 |          0 |          6 |        131 |
++---------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                        | language   | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| /home/cjw/dev/code/Ylink-backstage/README.md                                    | Markdown   |         19 |          0 |          6 |         25 |
+| /home/cjw/dev/code/Ylink-backstage/babel.config.js                              | JavaScript |          3 |          0 |          1 |          4 |
+| /home/cjw/dev/code/Ylink-backstage/package.json                                 | JSON       |         57 |          0 |          1 |         58 |
+| /home/cjw/dev/code/Ylink-backstage/public/index.html                            | HTML       |         16 |          1 |          1 |         18 |
+| /home/cjw/dev/code/Ylink-backstage/src/App.vue                                  | Vue        |         15 |          0 |          2 |         17 |
+| /home/cjw/dev/code/Ylink-backstage/src/components/Breadcrumb.vue                | Vue        |         42 |          0 |          4 |         46 |
+| /home/cjw/dev/code/Ylink-backstage/src/components/Header.vue                    | Vue        |         67 |          0 |          7 |         74 |
+| /home/cjw/dev/code/Ylink-backstage/src/components/Menu.vue                      | Vue        |         55 |          0 |          3 |         58 |
+| /home/cjw/dev/code/Ylink-backstage/src/element-variables.scss                   | SCSS       |          3 |          6 |          3 |         12 |
+| /home/cjw/dev/code/Ylink-backstage/src/main.js                                  | JavaScript |         14 |          1 |          5 |         20 |
+| /home/cjw/dev/code/Ylink-backstage/src/plugins/element.js                       | JavaScript |          4 |          0 |          2 |          6 |
+| /home/cjw/dev/code/Ylink-backstage/src/router/index.js                          | JavaScript |         44 |         13 |          2 |         59 |
+| /home/cjw/dev/code/Ylink-backstage/src/store/index.js                           | JavaScript |          9 |          0 |          3 |         12 |
+| /home/cjw/dev/code/Ylink-backstage/src/styles/btn.scss                          | SCSS       |         83 |          0 |         17 |        100 |
+| /home/cjw/dev/code/Ylink-backstage/src/styles/element-ui.scss                   | SCSS       |         64 |          6 |         15 |         85 |
+| /home/cjw/dev/code/Ylink-backstage/src/styles/element-variables.scss            | SCSS       |         13 |         10 |          9 |         32 |
+| /home/cjw/dev/code/Ylink-backstage/src/styles/index.scss                        | SCSS       |        164 |          2 |         36 |        202 |
+| /home/cjw/dev/code/Ylink-backstage/src/styles/mixin.scss                        | SCSS       |         56 |          0 |         11 |         67 |
+| /home/cjw/dev/code/Ylink-backstage/src/styles/sidebar.scss                      | SCSS       |        166 |          6 |         38 |        210 |
+| /home/cjw/dev/code/Ylink-backstage/src/styles/transition.scss                   | SCSS       |         35 |          4 |         10 |         49 |
+| /home/cjw/dev/code/Ylink-backstage/src/styles/variables.scss                    | SCSS       |         33 |          6 |          8 |         47 |
+| /home/cjw/dev/code/Ylink-backstage/src/views/Home.vue                           | Vue        |         54 |          1 |          8 |         63 |
+| /home/cjw/dev/code/Ylink-backstage/src/views/login.vue                          | Vue        |        130 |          2 |          8 |        140 |
+| /home/cjw/dev/code/Ylink-backstage/src/views/space/Space.vue                    | Vue        |          7 |          0 |          3 |         10 |
+| /home/cjw/dev/code/Ylink-backstage/src/views/user/User.vue                      | Vue        |        101 |          0 |          4 |        105 |
+| /home/cjw/dev/code/Ylink-backstage/src/views/user/components/ApplyList.vue      | Vue        |        129 |          0 |         11 |        140 |
+| /home/cjw/dev/code/Ylink-backstage/src/views/user/components/PieChart.vue       | Vue        |         97 |         11 |          5 |        113 |
+| /home/cjw/dev/code/Ylink-backstage/src/views/workbench/Workbench.vue            | Vue        |        288 |          2 |         20 |        310 |
+| /home/cjw/dev/code/Ylink-backstage/src/views/workbench/components/LineChart.vue | Vue        |        104 |          0 |          3 |        107 |
+| /home/cjw/dev/code/Ylink-backstage/src/views/workbench/components/List.vue      | Vue        |         21 |          0 |          3 |         24 |
+| /home/cjw/dev/code/Ylink-backstage/vue.config.js                                | JavaScript |         50 |          2 |          3 |         55 |
+| Total                                                                           |            |      1,943 |         73 |        252 |      2,268 |
++---------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

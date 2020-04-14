@@ -7,7 +7,6 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "Home",
     component: Home,
     children: [
       {
@@ -28,7 +27,7 @@ const routes = [
       {
         path: "content/post",
         name: "帖子管理",
-        component: () => import("@/views/user/User.vue")
+        component: () => import("@/views/post/Post.vue")
       },
       {
         path: "space",

@@ -31,6 +31,7 @@
           </el-card>
         </el-col>
       </el-row>
+      <user-table />
     </el-col>
     <el-col :span="7">
       <el-card shadow="nerver">
@@ -46,11 +47,13 @@
 <script>
 import PieChart from "./components/PieChart";
 import ApplyList from "./components/ApplyList";
+import UserTable from "./components/UserTable";
 
 export default {
   components: {
     PieChart,
-    ApplyList
+    ApplyList,
+    UserTable
   },
   data() {
     return {
