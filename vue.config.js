@@ -11,7 +11,13 @@ module.exports = {
     port: 8001, //端口号，如果端口号被占用，会自动加1
     host: "localhost", //主机名， 127.0.0.1，  真机 0.0.0.0
     https: false, //协议
-    open: true //启动服务时自动打开浏览器访问
+    open: false, //启动服务时自动打开浏览器访问
+    proxy: {
+      "/": {
+        target: "http://0.0.0.0:5000"
+        // changeOrigin: true
+      }
+    }
   },
   pages: {
     index: {

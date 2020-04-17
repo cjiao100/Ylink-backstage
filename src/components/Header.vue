@@ -12,7 +12,7 @@
       />
     </div>
     <div class="user-info">
-      <p>程俊伟</p>
+      <p @click="logout">程俊伟</p>
       <el-image class="avatar" :src="url"></el-image>
     </div>
   </div>
@@ -24,6 +24,11 @@ export default {
     return {
       url: ""
     };
+  },
+  methods: {
+    logout() {
+      this.$router.replace("/login");
+    }
   }
 };
 </script>

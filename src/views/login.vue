@@ -49,6 +49,8 @@
 </template>
 
 <script>
+import { login } from "@/api/user";
+
 export default {
   name: "login",
   data() {
@@ -58,9 +60,9 @@ export default {
   },
   methods: {
     login() {
-      console.log(this.loginForm);
-      // this.$route.push("/");
-      this.$router.push("/");
+      login(this.loginForm)
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
     }
   }
 };

@@ -47,14 +47,14 @@ const routes = [
     component: () => import("@/views/login")
   },
   {
-    path: "/*",
+    path: "*",
     name: "404",
     component: () => <h2>404</h2>
   }
 ];
 
 const router = new VueRouter({
-  mode: "history",
+  // mode: "history",
   base: process.env.BASE_URL,
   routes
 });
