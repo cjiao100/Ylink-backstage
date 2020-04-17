@@ -1,7 +1,9 @@
 <template>
   <el-card shadow="nerver" class="table">
     <div slot="header" class="card-header">
-      <el-button type="primary" size="small">新增文章</el-button>
+      <el-button type="primary" size="small">
+        <router-link to="/content/article/create">新增文章</router-link>
+      </el-button>
       <filter-component class="filter-content" />
     </div>
     <el-table :data="tableData" style="width: 100%">

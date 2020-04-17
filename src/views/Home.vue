@@ -49,7 +49,7 @@ export default {
       background-color: #fdfdfe;
       position: fixed;
       width: calc(100vw - 200px);
-      z-index: 1;
+      z-index: 2;
     }
 
     .content {

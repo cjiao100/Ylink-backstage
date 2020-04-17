@@ -25,6 +25,11 @@ const routes = [
         component: () => import("@/views/article/Article.vue")
       },
       {
+        path: "content/article/create",
+        name: "新增文章",
+        component: () => import("@/views/article/CreateArticle.vue")
+      },
+      {
         path: "content/post",
         name: "帖子管理",
         component: () => import("@/views/post/Post.vue")
