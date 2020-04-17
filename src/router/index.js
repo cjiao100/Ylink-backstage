@@ -22,7 +22,7 @@ const routes = [
       {
         path: "content/article",
         name: "文章管理",
-        component: () => import("@/views/user/User.vue")
+        component: () => import("@/views/article/Article.vue")
       },
       {
         path: "content/post",

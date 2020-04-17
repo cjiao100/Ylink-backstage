@@ -31,6 +31,34 @@ export default {
           }
         },
         {
+          name: "test",
+          info: {
+            brower: 20,
+            post: 6
+          }
+        },
+        {
+          name: "test",
+          info: {
+            brower: 20,
+            post: 6
+          }
+        },
+        {
+          name: "test",
+          info: {
+            brower: 20,
+            post: 6
+          }
+        },
+        {
+          name: "test",
+          info: {
+            brower: 20,
+            post: 6
+          }
+        },
+        {
           name: "testtt",
           info: {
             brower: 25,
@@ -44,6 +72,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.container {
+  overflow: auto;
+  height: calc(calc(100vh / 2) - 200px);
+}
 .list {
   padding-left: 20px;
   list-style: none;

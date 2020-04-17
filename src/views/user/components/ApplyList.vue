@@ -70,15 +70,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-::-webkit-scrollbar {
-  width: 4px;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #c2c2c2;
-  border-radius: 20px;
-}
-
 .container {
   text-align: left;
   height: calc(100vh - 240px);

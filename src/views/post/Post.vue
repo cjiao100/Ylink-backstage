@@ -31,10 +31,17 @@
       </el-row>
       <post-table />
     </el-col>
-    <el-col :span="7">
-      <el-card shadow="nerver">
-        <div slot="header" class="card-header">
-          <span>今日热门话题</span>
+    <el-col :span="7" class="list">
+      <el-card shadow="nerver" class="card-list">
+        <div slot="header" class="card-header ">
+          <span>举报列表</span>
+        </div>
+        <report-list />
+      </el-card>
+
+      <el-card shadow="nerver" class="card-list" style="margin-top: 20px;">
+        <div slot="header" class="card-header ">
+          <span>热门话题</span>
         </div>
         <topic-list />
       </el-card>
@@ -45,13 +52,15 @@
 <script>
 import LineChart from "./components/LineChart";
 import TopicList from "./components/TopicList";
+import ReportList from "./components/ReportList";
 import PostTable from "./components/PostTable";
 
 export default {
   components: {
     LineChart,
     TopicList,
-    PostTable
+    PostTable,
+    ReportList
   },
   data() {
     return {
@@ -105,6 +114,15 @@ export default {
         font-weight: normal;
       }
     }
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 140px);
+  .card-list {
+    flex: 1;
   }
 }
 </style>
