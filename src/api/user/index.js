@@ -1,8 +1,9 @@
 import base from "../base";
-import { Post } from "@/plugins/axios";
+import { Post, Get } from "@/plugins/axios";
 
 const USER_URL = "/user";
 
-export const login = params => {
-  return Post("/ylink/admin/user/login", params);
-};
+export const login = params =>
+  Post(`${base.ADMIN_URL}${USER_URL}/login`, params);
+
+export const simple = () => Get(`${base.ADMIN_URL}${USER_URL}/simple`);

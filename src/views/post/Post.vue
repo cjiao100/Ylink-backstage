@@ -29,7 +29,7 @@
           </el-card>
         </el-col>
       </el-row>
-      <post-table />
+      <post-table :postList="postList" />
     </el-col>
     <el-col :span="7" class="list">
       <el-card shadow="nerver" class="card-list">
@@ -43,13 +43,14 @@
         <div slot="header" class="card-header ">
           <span>热门话题</span>
         </div>
-        <topic-list />
+        <topic-list :topicList="topicHotList" />
       </el-card>
     </el-col>
   </el-row>
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 import LineChart from "./components/LineChart";
 import TopicList from "./components/TopicList";
 import ReportList from "./components/ReportList";
@@ -86,6 +87,16 @@ export default {
         "justify-content": "space-around"
       }
     };
+  },
+  mounted() {
+    this.getPostList({ pageNum: 0, pageSize: 5 });
+    this.getHotTopicList();
+  },
+  computed: {
+    ...mapGetters(["postList", "topicHotList"])
+  },
+  methods: {
+    ...mapActions(["getPostList", "getHotTopicList"])
   }
 };
 </script>

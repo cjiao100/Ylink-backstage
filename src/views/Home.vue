@@ -1,6 +1,6 @@
 <template>
   <div class="home-container">
-    <Header />
+    <Header :simpleUserInfo="simpleUserInfo" />
     <Menu class="nav-menu" />
     <div class="container">
       <Breadcrumb class="nav" />
@@ -15,12 +15,19 @@
 import Menu from "@/components/Menu.vue";
 import Header from "@/components/Header.vue";
 import Breadcrumb from "@/components/Breadcrumb.vue";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
     Menu,
     Header,
     Breadcrumb
+  },
+  computed: {
+    ...mapGetters(["simpleUserInfo"])
+  },
+  created() {
+    this.$store.dispatch("loadUserInfo");
   }
 };
 </script>

@@ -6,7 +6,7 @@
         <div class="item-info">
           <span class="name">{{ item.name }}</span>
           <p class="item-num">
-            <span>浏览 {{ item.info.brower }}</span>
+            <span>浏览 {{ item.info.browse }}</span>
             <span>帖子 {{ item.info.post }}</span>
           </p>
         </div>
@@ -20,53 +20,8 @@
 
 <script>
 export default {
-  data() {
-    return {
-      topicList: [
-        {
-          name: "test",
-          info: {
-            brower: 20,
-            post: 6
-          }
-        },
-        {
-          name: "test",
-          info: {
-            brower: 20,
-            post: 6
-          }
-        },
-        {
-          name: "test",
-          info: {
-            brower: 20,
-            post: 6
-          }
-        },
-        {
-          name: "test",
-          info: {
-            brower: 20,
-            post: 6
-          }
-        },
-        {
-          name: "test",
-          info: {
-            brower: 20,
-            post: 6
-          }
-        },
-        {
-          name: "testtt",
-          info: {
-            brower: 25,
-            post: 12
-          }
-        }
-      ]
-    };
+  props: {
+    topicList: Array
   }
 };
 </script>

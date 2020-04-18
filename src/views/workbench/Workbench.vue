@@ -10,8 +10,8 @@
             <i class="el-icon-user"></i>
           </div>
           <p class="date">
-            <span class="number">100</span> <span class="unit">人</span>
-            <br />本周新增用户
+            <span class="number">{{ week.user }}</span>
+            <span class="unit">人</span> <br />本周新增用户
           </p>
         </el-card>
       </el-col>
@@ -24,8 +24,8 @@
             <i class="el-icon-user"></i>
           </div>
           <p class="date">
-            <span class="number">100</span> <span class="unit">人</span>
-            <br />本周活跃帖子
+            <span class="number">{{ week.post }}</span>
+            <span class="unit">人</span> <br />本周活跃帖子
           </p>
         </el-card>
       </el-col>
@@ -38,8 +38,8 @@
             <i class="el-icon-user"></i>
           </div>
           <p class="date">
-            <span class="number">100</span> <span class="unit">人</span>
-            <br />本周优秀文章
+            <span class="number">{{ week.article }}</span>
+            <span class="unit">人</span> <br />本周优秀文章
           </p>
         </el-card>
       </el-col>
@@ -52,8 +52,8 @@
             <i class="el-icon-user"></i>
           </div>
           <p class="date">
-            <span class="number">100</span> <span class="unit">人</span>
-            <br />本周单词查询量
+            <span class="number">{{ week.word }}</span>
+            <span class="unit">人</span> <br />本周单词查询量
           </p>
         </el-card>
       </el-col>
@@ -132,7 +132,7 @@
           <div slot="header" class="card-header">
             <span>今日热门文章</span>
           </div>
-          <list :list="postList" />
+          <list getters="articleHotList" />
         </el-card>
       </el-col>
       <el-col :span="11">
@@ -140,7 +140,7 @@
           <div slot="header" class="card-header">
             <span>今日热门帖子</span>
           </div>
-          <list :list="postList" />
+          <list getters="postHotList" />
         </el-card>
       </el-col>
     </el-row>
@@ -148,6 +148,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import LineChart from "./components/LineChart";
 import List from "./components/List";
 
@@ -158,43 +159,6 @@ export default {
   },
   data() {
     return {
-      postList: [
-        {
-          id: 1,
-          title: "今日有一重大新闻",
-          author: "最多",
-          awesome: 10,
-          brower: 10
-        },
-        {
-          id: 1,
-          title: "今日有一重大新闻",
-          author: "最多",
-          awesome: 10,
-          brower: 10
-        },
-        {
-          id: 1,
-          title: "今日有一重大新闻",
-          author: "最多",
-          awesome: 10,
-          brower: 10
-        },
-        {
-          id: 1,
-          title: "今日有一重大新闻",
-          author: "最多",
-          awesome: 10,
-          brower: 10
-        },
-        {
-          id: 1,
-          title: "今日有一重大新闻",
-          author: "最多",
-          awesome: 10,
-          brower: 10
-        }
-      ],
       bodyStyle: {
         display: "flex",
         color: "#fff",
@@ -202,6 +166,14 @@ export default {
         boxSizing: "content-box"
       }
     };
+  },
+  mounted() {
+    this.$store.dispatch("loadWeekData");
+    this.$store.dispatch("getHotPostList");
+    this.$store.dispatch("getHotArticleList");
+  },
+  computed: {
+    ...mapGetters(["week"])
   }
 };
 </script>

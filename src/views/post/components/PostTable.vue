@@ -4,13 +4,23 @@
       <span>帖子列表</span>
       <filter-component class="filter-content" />
     </div>
-    <el-table :data="tableData" style="width: 100%">
-      <el-table-column type="index" width="100"> </el-table-column>
-      <el-table-column prop="date" label="帖子标题"> </el-table-column>
-      <el-table-column prop="name" label="发贴用户"> </el-table-column>
-      <el-table-column prop="address" label="浏览数"> </el-table-column>
-      <el-table-column prop="address" label="点赞数"> </el-table-column>
-      <el-table-column prop="address" label="评论数"> </el-table-column>
+    <el-table :data="postList" style="width: 100%">
+      <el-table-column type="index" width="100" />
+      <el-table-column prop="title" min-width="180" label="帖子标题" />
+      <el-table-column prop="author" width="120" label="发贴用户" />
+      <el-table-column align="center" width="80" prop="browse" label="浏览数" />
+      <el-table-column
+        align="center"
+        width="80"
+        prop="awesome"
+        label="点赞数"
+      />
+      <el-table-column
+        align="center"
+        width="80"
+        prop="comment"
+        label="评论数"
+      />
     </el-table>
   </el-card>
 </template>
@@ -22,10 +32,8 @@ export default {
   components: {
     FilterComponent
   },
-  data() {
-    return {
-      tableData: []
-    };
+  props: {
+    postList: Array
   }
 };
 </script>

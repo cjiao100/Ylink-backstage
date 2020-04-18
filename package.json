@@ -12,6 +12,7 @@
     "core-js": "^3.6.4",
     "echarts": "^4.6.0",
     "element-ui": "^2.4.5",
+    "moment": "^2.24.0",
     "sass-resources-loader": "^2.0.1",
     "v-charts": "^1.19.0",
     "vue": "^2.6.11",

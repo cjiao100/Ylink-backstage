@@ -12,18 +12,20 @@
       />
     </div>
     <div class="user-info">
-      <p @click="logout">程俊伟</p>
-      <el-image class="avatar" :src="url"></el-image>
+      <p @click="logout">{{ simpleUserInfo.name }}</p>
+      <el-image
+        v-if="simpleUserInfo.avatar"
+        class="avatar"
+        :src="simpleUserInfo.avatar"
+      ></el-image>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      url: ""
-    };
+  props: {
+    simpleUserInfo: Object
   },
   methods: {
     logout() {

@@ -8,14 +8,12 @@ const { BASE_URL } = process.env;
 
 // Full config:  https://github.com/axios/axios#request-config
 // axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || '';
-// axios.defaults.headers.common["Authorization"] = AUTH_TOKEN;
+axios.defaults.headers.common["Authorization"] = localStorage.getItem("token");
 axios.defaults.headers.post["Content-Type"] =
   "application/x-www-form-urlencoded";
 // axios.defaults.transformRequest = data => {
 //   return stringify(data);
 // };
-
-console.log(process);
 
 let config = {
   baseURL: BASE_URL || "",
@@ -33,12 +31,13 @@ const errorHandle = (status, other) => {
     // 401: 未登录状态，跳转登录页
     case 401:
       // 跳转登录页
-      router.replace({ path: `${BASE_URL}/login` });
+      router.replace({ path: `${BASE_URL}login` });
       break;
     // 403 token过期
     case 403:
-      // 如果不需要自动刷新token，可以在这里移除本地存储中的token，跳转登录页
-      router.replace({ path: `${BASE_URL}/login` });
+      if (router.currentRoute.name !== "login")
+        // 如果不需要自动刷新token，可以在这里移除本地存储中的token，跳转登录页
+        router.replace({ path: `${BASE_URL}login` });
       break;
     // 404请求不存在
     case 404:
@@ -67,7 +66,7 @@ _axios.interceptors.request.use(
 _axios.interceptors.response.use(
   function(response) {
     // Do something with response data
-    return response;
+    return response.data;
   },
   function(error) {
     errorHandle(error.response.status, error.response.data);

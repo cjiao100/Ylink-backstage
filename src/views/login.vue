@@ -22,7 +22,7 @@
                 size="smail"
                 class="custom-input"
                 placeholder="请输入帐号"
-                v-model="loginForm.name"
+                v-model="loginForm.email"
               ></el-input>
             </el-form-item>
             <el-form-item>
@@ -59,10 +59,14 @@ export default {
     };
   },
   methods: {
-    login() {
-      login(this.loginForm)
-        .then(res => console.log(res))
-        .catch(err => console.log(err));
+    async login() {
+      try {
+        const result = await login(this.loginForm);
+        localStorage.setItem("token", result.access_token);
+        this.$router.push("/");
+      } catch (error) {
+        console.warn(error);
+      }
     }
   }
 };
