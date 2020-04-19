@@ -31,7 +31,7 @@
           </el-card>
         </el-col>
       </el-row>
-      <user-table />
+      <user-table :userList="userList" />
     </el-col>
     <el-col :span="7">
       <el-card shadow="nerver">
@@ -45,6 +45,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 import PieChart from "./components/PieChart";
 import ApplyList from "./components/ApplyList";
 import UserTable from "./components/UserTable";
@@ -83,6 +84,15 @@ export default {
         "justify-content": "space-around"
       }
     };
+  },
+  mounted() {
+    this.getUserList({ pageSize: 5, pageNum: 0 });
+  },
+  methods: {
+    ...mapActions(["getUserList"])
+  },
+  computed: {
+    ...mapGetters(["userList"])
   }
 };
 </script>

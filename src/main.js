@@ -1,6 +1,7 @@
 import Vue from "vue";
 import "./plugins/axios";
 import VCharts from "v-charts";
+import moment from "moment";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
@@ -11,6 +12,8 @@ import "./plugins/element.js";
 
 Vue.use(VCharts);
 Vue.config.productionTip = false;
+
+moment.locale("zh-cn");
 
 new Vue({
   router,

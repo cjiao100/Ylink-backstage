@@ -7,3 +7,6 @@ export const login = params =>
   Post(`${base.ADMIN_URL}${USER_URL}/login`, params);
 
 export const simple = () => Get(`${base.ADMIN_URL}${USER_URL}/simple`);
+
+export const GetUserList = params =>
+  Get(`${base.ADMIN_URL}${USER_URL}/list`, params);
