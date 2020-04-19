@@ -35,6 +35,11 @@ const routes = [
         component: () => import("@/views/post/Post.vue")
       },
       {
+        path: "content/plan",
+        name: "计划管理",
+        component: () => import("@/views/plan/Plan.vue")
+      },
+      {
         path: "space",
         name: "个人空间",
         component: () => import("@/views/space/Space.vue")

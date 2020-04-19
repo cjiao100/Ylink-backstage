@@ -1,6 +1,3 @@
-const base = {
-  URL: "/ylink",
-  ADMIN_URL: "/ylink/admin"
-};
+export const URL = "/ylink";
 
-export default base;
+export const ADMIN_URL = "/ylink/admin";

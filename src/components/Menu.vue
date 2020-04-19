@@ -28,8 +28,14 @@
       </el-menu-item>
       <el-menu-item index="/content/post">
         <template slot="title">
-          <i class="el-icon-document"></i>
+          <i class="el-icon-tickets"></i>
           <span>帖子管理</span>
+        </template>
+      </el-menu-item>
+      <el-menu-item index="/content/plan">
+        <template slot="title">
+          <i class="el-icon-date"></i>
+          <span>计划管理</span>
         </template>
       </el-menu-item>
     </el-submenu>

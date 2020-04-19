@@ -1,13 +1,12 @@
-import base from "../base";
+import { ADMIN_URL } from "../base";
 import { Get } from "@/plugins/axios";
 
 const POST_URL = "/post";
 
 export const GetPostList = params =>
-  Get(`${base.ADMIN_URL}${POST_URL}/list`, params);
+  Get(`${ADMIN_URL}${POST_URL}/list`, params);
 
 export const GetHotPostList = params =>
-  Get(`${base.ADMIN_URL}${POST_URL}/list/hot`, params);
+  Get(`${ADMIN_URL}${POST_URL}/list/hot`, params);
 
-export const GetHotTopicList = () =>
-  Get(`${base.ADMIN_URL}${POST_URL}/topic/hot`);
+export const GetHotTopicList = () => Get(`${ADMIN_URL}${POST_URL}/topic/hot`);
