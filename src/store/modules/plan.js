@@ -3,7 +3,13 @@ import {
   GET_WROD_LIST,
   GET_WROD_LIST_BY_PLAN
 } from "@/store/mutation-types";
-import { GetPlanList, GetWordListByPlanId, GetWordList } from "@/api/plan";
+import {
+  GetPlanList,
+  GetWordListByPlanId,
+  GetWordList,
+  AddWordOnPlan,
+  DeleteWordOnPlan
+} from "@/api/plan";
 
 const Plan = {
   state: {
@@ -38,6 +44,14 @@ const Plan = {
     async getWordList({ commit }) {
       const wordList = await GetWordList();
       commit(GET_WROD_LIST, wordList);
+    },
+    async addWordOnPlan({ dispatch }, params) {
+      await AddWordOnPlan(params.id, params.list);
+      await dispatch("getWordList");
+    },
+    async deleteWordOnPlan({ dispatch }, params) {
+      await DeleteWordOnPlan(params.id, params.list);
+      await dispatch("getWordList");
     }
   },
 

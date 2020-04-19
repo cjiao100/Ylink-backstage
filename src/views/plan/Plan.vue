@@ -3,7 +3,7 @@
     <el-row>
       <el-col :span="2">
         <el-menu
-          default-active="1"
+          :default-active="currentPlan.id"
           class="el-menu-vertical-demo"
           @select="selectPlan"
         >
@@ -22,13 +22,14 @@
         </el-menu>
       </el-col>
       <el-col :span="20">
-        <h2>计划1</h2>
+        <h2>{{ currentPlan.name }}</h2>
         <el-transfer
           class="transfer"
           v-model="wordListOnPlan"
           :data="wordListOutPlan"
           :titles="['未加入计划', '计划中']"
           target-order="unshift"
+          @change="wordListChange"
           filterable
         ></el-transfer>
       </el-col>
@@ -43,7 +44,8 @@ export default {
   data() {
     return {
       wordListOnPlan: [],
-      wordListOutPlan: []
+      wordListOutPlan: [],
+      currentPlan: {}
     };
   },
   mounted() {
@@ -51,9 +53,24 @@ export default {
     this.getWordList();
   },
   methods: {
-    ...mapActions(["getPlanList", "getWordListByPlanId", "getWordList"]),
+    ...mapActions([
+      "getPlanList",
+      "getWordListByPlanId",
+      "getWordList",
+      "addWordOnPlan",
+      "deleteWordOnPlan"
+    ]),
     selectPlan(index) {
       this.getWordListByPlanId(index);
+    },
+    wordListChange(value, direction, list) {
+      if (direction === "right") {
+        // 添加
+        this.addWordOnPlan({ list, id: this.currentPlan.id });
+      } else {
+        // 删除
+        this.deleteWordOnPlan({ list, id: this.currentPlan.id });
+      }
     }
   },
   computed: {
@@ -64,8 +81,10 @@ export default {
       this.wordListOnPlan = newVal;
     },
     wordList(newVal) {
-      console.log(newVal);
       this.wordListOutPlan = newVal;
+    },
+    planList(newVal) {
+      this.currentPlan = newVal[0];
     }
   }
 };
