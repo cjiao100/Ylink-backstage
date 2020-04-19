@@ -25,7 +25,7 @@
           </div>
           <p class="date">
             <span class="number">{{ week.post }}</span>
-            <span class="unit">人</span> <br />本周活跃帖子
+            <span class="unit">篇</span> <br />本周活跃帖子
           </p>
         </el-card>
       </el-col>
@@ -39,7 +39,7 @@
           </div>
           <p class="date">
             <span class="number">{{ week.article }}</span>
-            <span class="unit">人</span> <br />本周优秀文章
+            <span class="unit">篇</span> <br />本周优秀文章
           </p>
         </el-card>
       </el-col>
@@ -53,7 +53,7 @@
           </div>
           <p class="date">
             <span class="number">{{ week.word }}</span>
-            <span class="unit">人</span> <br />本周单词查询量
+            <span class="unit">个</span> <br />本周单词查询量
           </p>
         </el-card>
       </el-col>

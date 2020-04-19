@@ -17,16 +17,14 @@ export default {
     level: Array,
     rowsData: Array
   },
+  mounted() {
+    console.log(this.chartData);
+  },
   data() {
     return {
       width: "100%",
       chartData: {
         columns: ["type", "num"],
-        // rows: [
-        //   { type: "全部用户", num: 3530 + 1393 },
-        //   { type: "活跃用户", num: 1393 },
-        //   { type: "其他用户", num: 3530 }
-        // ]
         rows: this.rowsData
       },
       chartSettings: {
@@ -43,17 +41,15 @@ export default {
           v.left = "0%";
           v.top = "45%";
           v.formatter = name => {
-            // console.log(this);
-            // console.log();
             let total = this.chartData.rows[0].num;
             let number = this.chartData.rows.filter(row => row.type === name)[0]
               .num;
 
-            // this.chartData.rows.fillter(row => row.type === name);
-
-            return `${name}\t {c|${((number / total) * 100).toFixed(
-              1
-            )}%} \t {c|${number}}`;
+            return total !== 0
+              ? `${name}\t {c|${((number / total) * 100).toFixed(
+                  1
+                )}%} \t {c|${number}}`
+              : `${name}\t {c|${number}}`;
           };
           v.textStyle = {
             rich: {
@@ -67,7 +63,6 @@ export default {
           return v;
         },
         series(v) {
-          // console.log(v);
           v[0].itemStyle = {
             color: "#fff"
           };

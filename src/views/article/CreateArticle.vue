@@ -11,14 +11,31 @@
       }"
     >
       <el-upload
+        v-if="!showCoverImg"
         class="upload"
         drag
-        action="https://jsonplaceholder.typicode.com/posts/"
-        multiple
+        action="/ylink/upload/article"
+        name="photos"
+        :show-file-list="false"
+        :headers="{
+          Authorization: token
+        }"
+        :on-success="uploadSuccess"
       >
         <i class="el-icon-upload"></i>
-        <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+        <div class="el-upload__text">添加封面</div>
       </el-upload>
+      <div v-else class="cover">
+        <img class="cover_img" :src="coverImg" />
+        <span class="cover_img-actions">
+          <span class="cover_icon" @click="handlePictureCardPreview()">
+            <i class="el-icon-zoom-in"></i>
+          </span>
+          <span class="cover_icon" @click="handleRemove()">
+            <i class="el-icon-delete"></i>
+          </span>
+        </span>
+      </div>
       <el-input
         placeholder="请输入标题"
         class="input"
@@ -27,19 +44,30 @@
       />
       <div ref="menus" class="menus" style="text-align:left"></div>
       <div ref="editor" class="editor" style="text-align:left"></div>
+      <div style="text-align: right">
+        <el-button type="primary" size="small" @click="release">发布</el-button>
+      </div>
     </el-card>
+    <el-dialog :visible.sync="dialogVisible">
+      <img width="100%" :src="coverImg" />
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import E from "wangeditor";
+import { PostArticle } from "@/api/article";
 
 export default {
   name: "create",
   data() {
     return {
       title: "",
-      editorContent: ""
+      editorContent: "",
+      dialogVisible: false,
+      showCoverImg: false,
+      token: localStorage.getItem("token"),
+      coverImg: ""
     };
   },
   mounted() {
@@ -47,9 +75,11 @@ export default {
     editor.customConfig.onchange = html => {
       this.editorContent = html;
     };
-    editor.customConfig.uploadImgServer = "/upload";
+    editor.customConfig.uploadImgServer = "/ylink/upload/article";
     editor.customConfig.uploadImgMaxLength = 5;
     editor.customConfig.uploadImgMaxSize = 5 * 1024 * 1024;
+    editor.customConfig.uploadImgHeaders = { Authorization: this.token };
+    editor.customConfig.uploadFileName = "photos";
     editor.customConfig.zIndex = 1;
     editor.customConfig.menus = [
       "head", // 标题
@@ -75,7 +105,30 @@ export default {
     ];
     editor.create();
   },
-  methods: {}
+  methods: {
+    handleRemove() {
+      this.showCoverImg = false;
+      this.coverImg = "";
+    },
+    handlePictureCardPreview() {
+      this.dialogVisible = true;
+    },
+    uploadSuccess(response, file) {
+      if (file.status === "success") {
+        this.showCoverImg = true;
+        this.coverImg = response.data[0];
+      }
+    },
+    async release() {
+      const params = {
+        title: this.title,
+        content: this.editorContent,
+        coverImage: this.coverImg
+      };
+      const article = await PostArticle(params);
+      console.log(article);
+    }
+  }
 };
 </script>
 
@@ -88,6 +141,42 @@ export default {
   .card {
     border: none;
     width: 660px;
+
+    .cover {
+      position: relative;
+
+      .cover_img {
+        width: 100%;
+        border-radius: 6px;
+      }
+
+      .cover_img-actions {
+        position: absolute;
+        width: 100%;
+        height: calc(100% - 4px);
+        left: 0;
+        top: 0;
+        cursor: default;
+        text-align: center;
+        color: #fff;
+        opacity: 0;
+        font-size: 20px;
+        background-color: rgba(0, 0, 0, 0.5);
+        transition: opacity 0.3s;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+
+        .cover_icon {
+          font-size: 30px;
+        }
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
 
     .menus {
       position: -webkit-sticky;

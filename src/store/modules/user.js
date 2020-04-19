@@ -44,6 +44,25 @@ const User = {
         ),
         lastDate: moment(item.lastDate).fromNow()
       }));
+    },
+    activeUser({ list }) {
+      return {
+        active: list.filter(item =>
+          moment(moment().weekday(0)).isBefore(item.lastDate)
+        ).length,
+        other: list.filter(item =>
+          moment(moment().weekday(0)).isAfter(item.lastDate)
+        ).length,
+        total: list.length
+      };
+    },
+    schoolUser({ list }) {
+      return {
+        student: list.filter(item => item.identity == 2).length,
+        teacher: list.filter(item => item.identity == 3).length,
+        total: list.filter(item => item.identity == 3 || item.identity == 2)
+          .length
+      };
     }
   }
 };

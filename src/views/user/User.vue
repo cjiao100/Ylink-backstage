@@ -9,6 +9,7 @@
             :body-style="statisticsStyle"
           >
             <pie-chart
+              v-if="active"
               :chartTitle="this.active.title"
               :label="this.active.label"
               :level="this.active.level"
@@ -23,6 +24,7 @@
             :body-style="statisticsStyle"
           >
             <pie-chart
+              v-if="school"
               :chartTitle="this.school.title"
               :label="this.school.label"
               :level="this.school.level"
@@ -58,26 +60,8 @@ export default {
   },
   data() {
     return {
-      active: {
-        title: "平台活跃情况",
-        label: { type: "类型", num: "人数" },
-        level: [["全部用户"], ["活跃用户", "其他用户"]],
-        rowsData: [
-          { type: "全部用户", num: 4923 },
-          { type: "活跃用户", num: 1393 },
-          { type: "其他用户", num: 3530 }
-        ]
-      },
-      school: {
-        title: "平台现有校园用户",
-        label: { type: "类型", num: "人数" },
-        level: [["校园用户"], ["学生", "老师"]],
-        rowsData: [
-          { type: "校园用户", num: 1393 },
-          { type: "老师", num: 69 },
-          { type: "学生", num: 1324 }
-        ]
-      },
+      active: null,
+      school: null,
       statisticsStyle: {
         width: "100%",
         display: "flex",
@@ -92,7 +76,33 @@ export default {
     ...mapActions(["getUserList"])
   },
   computed: {
-    ...mapGetters(["userList"])
+    ...mapGetters(["userList", "activeUser", "schoolUser"])
+  },
+  watch: {
+    activeUser(newVal) {
+      this.active = {
+        title: "平台活跃情况",
+        label: { type: "类型", num: "人数" },
+        level: [["全部用户"], ["活跃用户", "其他用户"]],
+        rowsData: [
+          { type: "全部用户", num: newVal.total },
+          { type: "活跃用户", num: newVal.active },
+          { type: "其他用户", num: newVal.other }
+        ]
+      };
+    },
+    schoolUser(newVal) {
+      this.school = {
+        title: "平台现有校园用户",
+        label: { type: "类型", num: "人数" },
+        level: [["校园用户"], ["学生", "老师"]],
+        rowsData: [
+          { type: "校园用户", num: newVal.total },
+          { type: "老师", num: newVal.teacher },
+          { type: "学生", num: newVal.student }
+        ]
+      };
+    }
   }
 };
 </script>
