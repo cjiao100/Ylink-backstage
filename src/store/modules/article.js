@@ -22,8 +22,8 @@ const Article = {
       const list = await GetArticleList(params);
       commit(GET_ARTICLE_LIST, list);
     },
-    async getHotArticleList({ commit }, params) {
-      const hot = await GetHotArticleList(params);
+    async getHotArticleList({ commit }) {
+      const hot = await GetHotArticleList();
       commit(GET_HOT_ARTICLE, hot);
     }
   },
@@ -38,8 +38,15 @@ const Article = {
         created_at: moment(item.created_at).format("YYYY-MM-DD")
       }));
     },
-    articleList(state) {
-      return state.list;
+    articleList({ list }) {
+      return list.map(item => ({
+        id: item._id,
+        title: item.title,
+        author: item.userId.name,
+        browse: item.browse,
+        awesome: item.awesome.length,
+        comment: item.comment.length
+      }));
     }
   }
 };

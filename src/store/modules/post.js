@@ -28,7 +28,6 @@ const Post = {
   actions: {
     async getPostList({ commit }, params) {
       const list = await GetPostList(params);
-      console.log(list);
       commit(GET_POST_LIST, list);
     },
     async getHotPostList({ commit }) {
