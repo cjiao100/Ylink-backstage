@@ -1,17 +1,15 @@
 <template>
   <el-card class="plan" shadow="never">
-    <el-row>
-      <el-col :span="2">
+    <el-row type="flex">
+      <el-col :span="2" class="menu">
+        <el-button type="primary" size="small">
+          <router-link to="/content/article/create">新增文章</router-link>
+        </el-button>
         <el-menu
-          :default-active="currentPlan.id"
-          class="el-menu-vertical-demo"
+          :default-active="defaultPlanId"
+          class="menu-vertical"
           @select="selectPlan"
         >
-          <el-menu-item>
-            <el-button slot="title" type="primary" size="small">
-              <router-link to="/content/article/create">新增文章</router-link>
-            </el-button>
-          </el-menu-item>
           <el-menu-item
             v-for="plan in planList"
             :index="plan.id"
@@ -21,7 +19,7 @@
           </el-menu-item>
         </el-menu>
       </el-col>
-      <el-col :span="20">
+      <el-col :span="11" class="config">
         <h2>{{ currentPlan.name }}</h2>
         <el-transfer
           class="transfer"
@@ -32,6 +30,26 @@
           @change="wordListChange"
           filterable
         ></el-transfer>
+      </el-col>
+      <el-col :span="11" class="search">
+        <div class="input">
+          <el-input v-model="query" size="small" placeholder="搜索单词">
+            <el-button
+              slot="append"
+              icon="el-icon-search"
+              @click="searchWord"
+            ></el-button>
+          </el-input>
+        </div>
+        <div class="result">
+          <p v-if="!word">如列表中没有你项添加的单词,请在这里搜索后添加</p>
+          <div v-else>
+            <h3>{{ word.query }}</h3>
+            <div>
+              {{ word.basic.explains.toString() }}
+            </div>
+          </div>
+        </div>
       </el-col>
     </el-row>
   </el-card>
@@ -45,7 +63,9 @@ export default {
     return {
       wordListOnPlan: [],
       wordListOutPlan: [],
-      currentPlan: {}
+      currentPlan: {},
+      defaultPlanId: "",
+      query: ""
     };
   },
   mounted() {
@@ -58,10 +78,15 @@ export default {
       "getWordListByPlanId",
       "getWordList",
       "addWordOnPlan",
-      "deleteWordOnPlan"
+      "deleteWordOnPlan",
+      "translate"
     ]),
     selectPlan(index) {
       this.getWordListByPlanId(index);
+      this.currentPlan = {
+        name: this.$store.getters.currentPlanName(index),
+        id: index
+      };
     },
     wordListChange(value, direction, list) {
       if (direction === "right") {
@@ -71,10 +96,17 @@ export default {
         // 删除
         this.deleteWordOnPlan({ list, id: this.currentPlan.id });
       }
+    },
+    searchWord() {
+      const wrod = {
+        query: this.query
+      };
+
+      this.translate(wrod);
     }
   },
   computed: {
-    ...mapGetters(["planList", "wordOnPlan", "wordList"])
+    ...mapGetters(["planList", "wordOnPlan", "wordList", "word"])
   },
   watch: {
     wordOnPlan(newVal) {
@@ -85,6 +117,8 @@ export default {
     },
     planList(newVal) {
       this.currentPlan = newVal[0];
+      this.defaultPlanId = newVal[0].id;
+      this.getWordListByPlanId(this.defaultPlanId);
     }
   }
 };
@@ -97,9 +131,48 @@ export default {
     font-weight: 600;
     font-size: 18px;
   }
-  .transfer {
-    text-align: left;
-    margin-left: 20px;
+  .menu {
+    display: flex;
+    flex-direction: column;
+    .menu-vertical {
+      flex: 1;
+    }
+  }
+  .config {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: solid 1px #e6e6e6;
+
+    .transfer {
+      text-align: left;
+      margin-left: 20px;
+    }
+  }
+
+  .search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+
+    .input {
+      width: 300px;
+      height: 50px;
+    }
+
+    .result {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      p {
+        color: #737373;
+        font-size: 20px;
+      }
+    }
   }
 }
 </style>

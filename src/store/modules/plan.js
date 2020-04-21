@@ -1,4 +1,5 @@
 import {
+  TRANSLATE,
   GET_PLAN_LIST,
   GET_WROD_LIST,
   GET_WROD_LIST_BY_PLAN
@@ -8,14 +9,16 @@ import {
   GetWordListByPlanId,
   GetWordList,
   AddWordOnPlan,
-  DeleteWordOnPlan
+  DeleteWordOnPlan,
+  SearchWord
 } from "@/api/plan";
 
 const Plan = {
   state: {
     plan: [],
     wordList: [],
-    wordOnPlan: []
+    wordOnPlan: [],
+    word: null
   },
   mutations: {
     [GET_PLAN_LIST](state, plan) {
@@ -29,6 +32,9 @@ const Plan = {
     },
     [GET_WROD_LIST](state, wordList) {
       state.wordList = wordList;
+    },
+    [TRANSLATE](state, word) {
+      state.word = word.data;
     }
   },
 
@@ -45,13 +51,18 @@ const Plan = {
       const wordList = await GetWordList();
       commit(GET_WROD_LIST, wordList);
     },
-    async addWordOnPlan({ dispatch }, params) {
+    async addWordOnPlan(params) {
       await AddWordOnPlan(params.id, params.list);
-      await dispatch("getWordList");
+      // dispatch("getWordList");
     },
-    async deleteWordOnPlan({ dispatch }, params) {
+    async deleteWordOnPlan(params) {
       await DeleteWordOnPlan(params.id, params.list);
-      await dispatch("getWordList");
+      // dispatch("getWordList");
+    },
+    async translate({ commit, dispatch }, params) {
+      const word = await SearchWord(params);
+      commit(TRANSLATE, word);
+      dispatch("getWordList");
     }
   },
 
@@ -68,6 +79,12 @@ const Plan = {
         label: item.query,
         disabled: false
       }));
+    },
+    currentPlanName({ plan }) {
+      return id => plan.find(item => item.id === id).name;
+    },
+    word({ word }) {
+      return word;
     }
   }
 };
