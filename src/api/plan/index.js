@@ -1,5 +1,5 @@
 import { ADMIN_URL, URL } from "../base";
-import { Put, Get, Post } from "@/plugins/axios";
+import { Put, Get, Post, Delete } from "@/plugins/axios";
 
 const PLAN_URL = "/plan";
 const WORD_URL = "/word";
@@ -20,3 +20,8 @@ export const DeleteWordOnPlan = (planId, wordIdList) =>
   });
 
 export const SearchWord = word => Post(`${URL}/translate`, word);
+
+export const CreateNewPLan = plan => Post(`${ADMIN_URL}${PLAN_URL}/add`, plan);
+
+export const DeletePlan = planId =>
+  Delete(`${ADMIN_URL}${PLAN_URL}/delete/${planId}`);

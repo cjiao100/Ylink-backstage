@@ -2,8 +2,8 @@
   <el-card class="plan" shadow="never">
     <el-row type="flex">
       <el-col :span="2" class="menu">
-        <el-button type="primary" size="small">
-          <router-link to="/content/article/create">新增文章</router-link>
+        <el-button type="primary" size="small" @click="openCreatePlanDialog">
+          新增计划
         </el-button>
         <el-menu
           :default-active="defaultPlanId"
@@ -20,7 +20,17 @@
         </el-menu>
       </el-col>
       <el-col :span="11" class="config">
-        <h2>{{ currentPlan.name }}</h2>
+        <div class="config-header">
+          <h2>{{ currentPlan.name }}</h2>
+          <el-button
+            type="danger"
+            size="small"
+            class="config-button"
+            @click="deletePlanById"
+          >
+            删除计划
+          </el-button>
+        </div>
         <el-transfer
           class="transfer"
           v-model="wordListOnPlan"
@@ -52,15 +62,30 @@
         </div>
       </el-col>
     </el-row>
+    <el-dialog :visible.sync="dialogVisible" width="30%">
+      <create-plan ref="create" />
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="closeCreatePlanDialog">取 消</el-button>
+        <el-button type="primary" @click="createPlan">
+          确 定
+        </el-button>
+      </span>
+    </el-dialog>
   </el-card>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import { DeletePlan } from "@/api/plan";
+import CreatePlan from "./CreatePlan";
 
 export default {
+  components: {
+    CreatePlan
+  },
   data() {
     return {
+      dialogVisible: false,
       wordListOnPlan: [],
       wordListOutPlan: [],
       currentPlan: {},
@@ -103,6 +128,37 @@ export default {
       };
 
       this.translate(wrod);
+    },
+    openCreatePlanDialog() {
+      this.dialogVisible = true;
+    },
+    closeCreatePlanDialog() {
+      this.dialogVisible = false;
+    },
+    async createPlan() {
+      let error = this.$refs.create.validate();
+      if (error) {
+        return this.$message.error(error.data);
+      }
+
+      error = await this.$store.dispatch("createNewPlan");
+      if (error) {
+        return this.$message.error(error.data);
+      }
+
+      this.$message("新建计划成功");
+      this.closeCreatePlanDialog();
+      this.getPlanList();
+    },
+    async deletePlanById() {
+      const result = await DeletePlan(this.currentPlan.id);
+      console.log(result);
+      if (result) {
+        this.$message("删除成功");
+        this.getPlanList();
+      } else {
+        this.$message.error("删除失败");
+      }
     }
   },
   computed: {
@@ -147,6 +203,17 @@ export default {
     .transfer {
       text-align: left;
       margin-left: 20px;
+    }
+
+    .config-header {
+      width: 100%;
+      position: relative;
+    }
+    .config-button {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
     }
   }
 

@@ -2,15 +2,17 @@ import {
   TRANSLATE,
   GET_PLAN_LIST,
   GET_WROD_LIST,
+  CREATE_NEW_PLAN,
   GET_WROD_LIST_BY_PLAN
 } from "@/store/mutation-types";
 import {
+  SearchWord,
   GetPlanList,
-  GetWordListByPlanId,
   GetWordList,
   AddWordOnPlan,
+  CreateNewPLan,
   DeleteWordOnPlan,
-  SearchWord
+  GetWordListByPlanId
 } from "@/api/plan";
 
 const Plan = {
@@ -18,7 +20,8 @@ const Plan = {
     plan: [],
     wordList: [],
     wordOnPlan: [],
-    word: null
+    word: null,
+    newPlan: {}
   },
   mutations: {
     [GET_PLAN_LIST](state, plan) {
@@ -35,6 +38,9 @@ const Plan = {
     },
     [TRANSLATE](state, word) {
       state.word = word.data;
+    },
+    [CREATE_NEW_PLAN](state, plan) {
+      state.newPlan = plan;
     }
   },
 
@@ -51,11 +57,11 @@ const Plan = {
       const wordList = await GetWordList();
       commit(GET_WROD_LIST, wordList);
     },
-    async addWordOnPlan(params) {
+    async addWordOnPlan(store, params) {
       await AddWordOnPlan(params.id, params.list);
       // dispatch("getWordList");
     },
-    async deleteWordOnPlan(params) {
+    async deleteWordOnPlan(store, params) {
       await DeleteWordOnPlan(params.id, params.list);
       // dispatch("getWordList");
     },
@@ -63,6 +69,16 @@ const Plan = {
       const word = await SearchWord(params);
       commit(TRANSLATE, word);
       dispatch("getWordList");
+    },
+    async createNewPlan({ state }) {
+      try {
+        await CreateNewPLan(state.newPlan);
+      } catch (error) {
+        return error;
+      }
+    },
+    async setNewPlan({ commit }, plan) {
+      commit(CREATE_NEW_PLAN, plan);
     }
   },
 
