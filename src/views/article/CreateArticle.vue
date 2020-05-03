@@ -42,7 +42,7 @@
         size="large"
         v-model="title"
       />
-      <div ref="menus" class="menus" style="text-align:left"></div>
+      <div ref="menus" style="text-align:left"></div>
       <div ref="editor" class="editor" style="text-align:left"></div>
       <div style="text-align: right">
         <el-button type="primary" size="small" @click="release">发布</el-button>
@@ -119,14 +119,32 @@ export default {
         this.coverImg = response.data[0];
       }
     },
+    validate(data) {
+      if (!data.title) {
+        return "标题不能为空";
+      }
+      if (!data.content) {
+        return "内容不能为空";
+      }
+      if (!data.coverImg) {
+        return "封面不能为空";
+      }
+
+      return false;
+    },
     async release() {
       const params = {
         title: this.title,
         content: this.editorContent,
         coverImage: this.coverImg
       };
-      const article = await PostArticle(params);
-      console.log(article);
+      const error = this.validate(params);
+      if (error) {
+        this.$message.error(error);
+      } else {
+        const article = await PostArticle(params);
+        console.log(article);
+      }
     }
   }
 };
@@ -176,12 +194,6 @@ export default {
           opacity: 1;
         }
       }
-    }
-
-    .menus {
-      position: -webkit-sticky;
-      position: sticky;
-      top: 0px;
     }
 
     .editor {

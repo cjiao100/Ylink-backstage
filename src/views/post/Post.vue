@@ -10,7 +10,10 @@
           >
             <div class="card-header chart-title">
               <p>今日新增帖子</p>
-              <p class="num">10<span class="unit">篇</span></p>
+              <p class="num">
+                {{ postToday }}
+                <span class="unit">篇</span>
+              </p>
             </div>
             <line-chart lineColor="#388fd6" :rowsData="post" />
           </el-card>
@@ -23,7 +26,10 @@
           >
             <div class="card-header chart-title">
               <p>今日新增话题</p>
-              <p class="num">10<span class="unit">个</span></p>
+              <p class="num">
+                {{ topicToday }}
+                <span class="unit">个</span>
+              </p>
             </div>
             <line-chart lineColor="#eb9d53" :rowsData="topic" />
           </el-card>
@@ -65,22 +71,8 @@ export default {
   },
   data() {
     return {
-      post: [
-        { 日期: "2018-01-01", 新增: 139 },
-        { 日期: "2018-01-02", 新增: 353 },
-        { 日期: "2018-01-03", 新增: 292 },
-        { 日期: "2018-01-05", 新增: 172 },
-        { 日期: "2018-01-10", 新增: 379 },
-        { 日期: "2018-01-20", 新增: 459 }
-      ],
-      topic: [
-        { 日期: "2018-01-01", 新增: 393 },
-        { 日期: "2018-01-02", 新增: 530 },
-        { 日期: "2018-01-03", 新增: 923 },
-        { 日期: "2018-01-05", 新增: 723 },
-        { 日期: "2018-01-10", 新增: 792 },
-        { 日期: "2018-01-20", 新增: 593 }
-      ],
+      postToday: 0,
+      topicToday: 0,
       statisticsStyle: {
         width: "100%",
         display: "flex",
@@ -91,12 +83,27 @@ export default {
   mounted() {
     this.getPostList({ pageNum: 0, pageSize: 5 });
     this.getHotTopicList();
+    this.getNewPostDateInSevenDay();
+    this.getNewTopicDateInSevenDay();
   },
   computed: {
-    ...mapGetters(["postList", "topicHotList"])
+    ...mapGetters(["postList", "topicHotList", "post", "topic"])
   },
   methods: {
-    ...mapActions(["getPostList", "getHotTopicList"])
+    ...mapActions([
+      "getPostList",
+      "getHotTopicList",
+      "getNewPostDateInSevenDay",
+      "getNewTopicDateInSevenDay"
+    ])
+  },
+  watch: {
+    post(newVal) {
+      this.postToday = newVal[6].count || 0;
+    },
+    topic(newVal) {
+      this.topicToday = newVal[6].count || 0;
+    }
   }
 };
 </script>

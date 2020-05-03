@@ -17,7 +17,7 @@ export default {
   data() {
     return {
       chartData: {
-        columns: ["日期", "新增"],
+        columns: ["date", "count"],
         rows: this.rowsData
       },
       settings: {

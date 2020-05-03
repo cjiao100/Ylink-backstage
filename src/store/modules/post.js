@@ -1,16 +1,26 @@
 import {
   GET_POST_LIST,
   GET_HOT_POST,
-  GET_HOT_TOPIC
+  GET_HOT_TOPIC,
+  GET_NEW_POST_PER_DAY,
+  GET_NEW_TOPIC_PER_DAY
 } from "@/store/mutation-types";
-import { GetPostList, GetHotPostList, GetHotTopicList } from "@/api/post";
+import {
+  GetPostList,
+  GetHotPostList,
+  GetHotTopicList,
+  GetNewPostPerDay,
+  GetNewTopicPerDay
+} from "@/api/post";
 import moment from "moment";
 
 const Post = {
   state: {
     list: [],
     hot: [],
-    topic: []
+    topic: [],
+    postPerDay: [],
+    topicPerDay: []
   },
   mutations: {
     [GET_POST_LIST](state, list) {
@@ -22,6 +32,12 @@ const Post = {
     },
     [GET_HOT_TOPIC](state, topic) {
       state.topic = topic;
+    },
+    [GET_NEW_POST_PER_DAY](state, payload) {
+      state.postPerDay = payload;
+    },
+    [GET_NEW_TOPIC_PER_DAY](state, payload) {
+      state.topicPerDay = payload;
     }
   },
 
@@ -37,6 +53,14 @@ const Post = {
     async getHotTopicList({ commit }) {
       const topic = await GetHotTopicList();
       commit(GET_HOT_TOPIC, topic);
+    },
+    async getNewPostDateInSevenDay({ commit }) {
+      const postPerDay = await GetNewPostPerDay();
+      commit(GET_NEW_POST_PER_DAY, postPerDay);
+    },
+    async getNewTopicDateInSevenDay({ commit }) {
+      const topicPerDay = await GetNewTopicPerDay();
+      commit(GET_NEW_TOPIC_PER_DAY, topicPerDay);
     }
   },
 
@@ -69,6 +93,12 @@ const Post = {
           post: item.postList.length
         }
       }));
+    },
+    post({ postPerDay }) {
+      return postPerDay;
+    },
+    topic({ topicPerDay }) {
+      return topicPerDay;
     }
   }
 };

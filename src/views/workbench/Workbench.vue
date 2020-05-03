@@ -25,7 +25,7 @@
           </div>
           <p class="date">
             <span class="number">{{ week.post }}</span>
-            <span class="unit">篇</span> <br />本周活跃帖子
+            <span class="unit">篇</span> <br />本周新增帖子
           </p>
         </el-card>
       </el-col>
@@ -39,7 +39,7 @@
           </div>
           <p class="date">
             <span class="number">{{ week.article }}</span>
-            <span class="unit">篇</span> <br />本周优秀文章
+            <span class="unit">篇</span> <br />本周新增文章
           </p>
         </el-card>
       </el-col>
@@ -61,60 +61,7 @@
 
     <el-row class="message-content" type="flex" justify="space-around">
       <el-col :span="7">
-        <el-card class="message-card" shadow="nerver">
-          <div slot="header" class="card-header">
-            <span>代办事项</span>
-            <el-button
-              class="add-btn"
-              icon="el-icon-plus"
-              type="primary"
-              circle
-            >
-            </el-button>
-          </div>
-          <div>
-            <ul class="todo-list">
-              <li v-for="i in 6" :key="i">
-                <div>
-                  <el-tag effect="dark" type="warning" size="mini">
-                    待审核
-                  </el-tag>
-                  <span class="message">
-                    代办事项代办事项代办事项代办事项代办事项代办事项代办事项代办事项代办事项
-                  </span>
-                  <!-- <el-button-group> -->
-                  <!-- </el-button-group> -->
-                  <el-button
-                    type="primary"
-                    size="mini"
-                    icon="el-icon-check"
-                    circle
-                    plain
-                  ></el-button>
-                  <el-button
-                    type="danger"
-                    size="mini"
-                    icon="el-icon-close"
-                    circle
-                    plain
-                  ></el-button>
-                </div>
-              </li>
-            </ul>
-            <div class="btn-group">
-              <el-button
-                class="next-btn"
-                icon="el-icon-arrow-left"
-                size="mini"
-              ></el-button>
-              <el-button
-                class="next-btn"
-                icon="el-icon-arrow-right"
-                size="mini"
-              ></el-button>
-            </div>
-          </div>
-        </el-card>
+        <todo />
       </el-col>
       <el-col :span="15">
         <el-card class="message-card" shadow="nerver">
@@ -151,11 +98,13 @@
 import { mapGetters } from "vuex";
 import LineChart from "./components/LineChart";
 import List from "./components/List";
+import Todo from "./components/Todo";
 
 export default {
   components: {
     LineChart,
-    List
+    List,
+    Todo
   },
   data() {
     return {

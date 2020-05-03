@@ -23,3 +23,11 @@ export const GET_WROD_LIST = "GET_WROD_LIST";
 export const TRANSLATE = "TRANSLATE";
 
 export const CREATE_NEW_PLAN = "CREATE_NEW_PLAN";
+
+export const GET_NEW_POST_PER_DAY = "GET_NEW_POST_PER_DAY";
+
+export const GET_NEW_TOPIC_PER_DAY = "GET_NEW_TOPIC_PER_DAY";
+
+export const GET_TODO_LIST = "GET_TODO_LIST";
+
+export const CREATE_NEW_TODO = "CREATE_NEW_TODO";

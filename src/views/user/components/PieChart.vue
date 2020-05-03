@@ -17,9 +17,6 @@ export default {
     level: Array,
     rowsData: Array
   },
-  mounted() {
-    console.log(this.chartData);
-  },
   data() {
     return {
       width: "100%",

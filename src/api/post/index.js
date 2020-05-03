@@ -10,3 +10,7 @@ export const GetHotPostList = params =>
   Get(`${ADMIN_URL}${POST_URL}/list/hot`, params);
 
 export const GetHotTopicList = () => Get(`${ADMIN_URL}${POST_URL}/topic/hot`);
+
+export const GetNewPostPerDay = () => Get(`${ADMIN_URL}${POST_URL}/day/post`);
+
+export const GetNewTopicPerDay = () => Get(`${ADMIN_URL}${POST_URL}/day/topic`);
