@@ -15,7 +15,11 @@
                 <span class="unit">篇</span>
               </p>
             </div>
-            <line-chart lineColor="#388fd6" :rowsData="post" />
+            <line-chart
+              v-if="showPostChart"
+              lineColor="#388fd6"
+              :rowsData="post"
+            />
           </el-card>
         </el-col>
         <el-col :span="11">
@@ -31,7 +35,11 @@
                 <span class="unit">个</span>
               </p>
             </div>
-            <line-chart lineColor="#eb9d53" :rowsData="topic" />
+            <line-chart
+              v-if="showTopicChart"
+              lineColor="#eb9d53"
+              :rowsData="topic"
+            />
           </el-card>
         </el-col>
       </el-row>
@@ -71,6 +79,8 @@ export default {
   },
   data() {
     return {
+      showPostChart: false,
+      showTopicChart: false,
       postToday: 0,
       topicToday: 0,
       statisticsStyle: {
@@ -99,9 +109,11 @@ export default {
   },
   watch: {
     post(newVal) {
+      this.showPostChart = true;
       this.postToday = newVal[6].count || 0;
     },
     topic(newVal) {
+      this.showTopicChart = true;
       this.topicToday = newVal[6].count || 0;
     }
   }
