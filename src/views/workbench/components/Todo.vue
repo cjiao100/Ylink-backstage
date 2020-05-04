@@ -2,7 +2,13 @@
   <el-card class="message-card" shadow="nerver">
     <div slot="header" class="card-header">
       <span>代办事项</span>
-      <el-button class="add-btn" icon="el-icon-plus" type="primary" circle>
+      <el-button
+        class="add-btn"
+        icon="el-icon-plus"
+        type="primary"
+        @click="openCreateTodoDialog"
+        circle
+      >
       </el-button>
     </div>
     <div>
@@ -47,13 +53,32 @@
         ></el-button>
       </div>
     </div>
+    <el-dialog :visible.sync="createTodoDialogVisble">
+      <create-todo ref="create" />
+
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="closeCreateTodoDialog">取 消</el-button>
+        <el-button type="primary" @click="createTodo">
+          确 定
+        </el-button>
+      </span>
+    </el-dialog>
   </el-card>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { DeleteTodo, CompleteTodo } from "@/api/workbench";
+import CreateTodo from "./CreateTodo";
 export default {
+  components: {
+    CreateTodo
+  },
+  data() {
+    return {
+      createTodoDialogVisble: false
+    };
+  },
   mounted() {
     this.getTodoList();
   },
@@ -61,7 +86,7 @@ export default {
     ...mapGetters(["todoList"])
   },
   methods: {
-    ...mapActions(["getTodoList"]),
+    ...mapActions(["getTodoList", "addTodo"]),
     async completeTodo(todoId) {
       try {
         await CompleteTodo(todoId);
@@ -79,6 +104,27 @@ export default {
       } catch (error) {
         this.$message.error("失败");
       }
+    },
+    async createTodo() {
+      let error = this.$refs.create.validate();
+      if (error) {
+        return this.$message.error(error.data);
+      }
+
+      error = await this.addTodo();
+      if (error) {
+        return this.$message.error(error.data);
+      }
+
+      this.$message("新建成功");
+      this.closeCreateTodoDialog();
+      this.getTodoList();
+    },
+    closeCreateTodoDialog() {
+      this.createTodoDialogVisble = false;
+    },
+    openCreateTodoDialog() {
+      this.createTodoDialogVisble = true;
     }
   }
 };
