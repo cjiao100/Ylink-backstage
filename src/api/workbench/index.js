@@ -14,3 +14,6 @@ export const AddTodo = params => Post(`${ADMIN_URL}${TODO_URL}/add`, params);
 export const DeleteTodo = todoId => Delete(`${ADMIN_URL}${TODO_URL}/${todoId}`);
 
 export const CompleteTodo = todoId => Put(`${ADMIN_URL}${TODO_URL}/${todoId}`);
+
+export const PassReport = todoId =>
+  Delete(`${ADMIN_URL}${TODO_URL}/report/${todoId}`);

@@ -31,3 +31,5 @@ export const GET_NEW_TOPIC_PER_DAY = "GET_NEW_TOPIC_PER_DAY";
 export const GET_TODO_LIST = "GET_TODO_LIST";
 
 export const CREATE_NEW_TODO = "CREATE_NEW_TODO";
+
+export const GET_REPORT_LIST = "GET_REPORT_LIST";

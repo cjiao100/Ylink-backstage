@@ -27,7 +27,7 @@
               icon="el-icon-check"
               circle
               plain
-              @click="completeTodo(todo._id)"
+              @click="completeTodo(todo._id, todo.post)"
             ></el-button>
             <el-button
               type="danger"
@@ -68,7 +68,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import { DeleteTodo, CompleteTodo } from "@/api/workbench";
+import { DeleteTodo, CompleteTodo, PassReport } from "@/api/workbench";
 import CreateTodo from "./CreateTodo";
 export default {
   components: {
@@ -87,9 +87,13 @@ export default {
   },
   methods: {
     ...mapActions(["getTodoList", "addTodo"]),
-    async completeTodo(todoId) {
+    async completeTodo(todoId, post) {
       try {
-        await CompleteTodo(todoId);
+        if (post) {
+          await PassReport(todoId);
+        } else {
+          await CompleteTodo(todoId);
+        }
         this.getTodoList();
         this.$message("完成");
       } catch (error) {

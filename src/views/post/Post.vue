@@ -50,7 +50,7 @@
         <div slot="header" class="card-header ">
           <span>举报列表</span>
         </div>
-        <report-list />
+        <report-list :reportList="reportList" @refresh="getReportList()" />
       </el-card>
 
       <el-card shadow="nerver" class="card-list" style="margin-top: 20px;">
@@ -92,16 +92,18 @@ export default {
   },
   mounted() {
     this.getPostList({ pageNum: 0, pageSize: 5 });
+    this.getReportList();
     this.getHotTopicList();
     this.getNewPostDateInSevenDay();
     this.getNewTopicDateInSevenDay();
   },
   computed: {
-    ...mapGetters(["postList", "topicHotList", "post", "topic"])
+    ...mapGetters(["postList", "topicHotList", "post", "topic", "reportList"])
   },
   methods: {
     ...mapActions([
       "getPostList",
+      "getReportList",
       "getHotTopicList",
       "getNewPostDateInSevenDay",
       "getNewTopicDateInSevenDay"

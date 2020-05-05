@@ -1,25 +1,33 @@
 <template>
   <div class="container">
     <ul class="list">
-      <li class="item" v-for="(item, index) in topicList" :key="index">
-        <span class="serial">{{ index + 1 }}</span>
-        <div class="item-info">
-          <span class="name">{{ item.name }}</span>
-          <p class="item-num">
-            <span>浏览 {{ item.info.browse }}</span>
-            <span>帖子 {{ item.info.post }}</span>
-          </p>
-        </div>
-        <div class="item-left">
-          <el-button class="jump" icon="el-icon-right" circle></el-button>
-        </div>
-      </li>
+      <template v-if="topicList.length !== 0">
+        <li class="item" v-for="(item, index) in topicList" :key="index">
+          <span class="serial">{{ index + 1 }}</span>
+          <div class="item-info">
+            <span class="name">{{ item.name }}</span>
+            <p class="item-num">
+              <span>浏览 {{ item.info.browse }}</span>
+              <span>帖子 {{ item.info.post }}</span>
+            </p>
+          </div>
+          <div class="item-left">
+            <el-button class="jump" icon="el-icon-right" circle></el-button>
+          </div>
+        </li>
+      </template>
+      <empty v-else />
     </ul>
   </div>
 </template>
 
 <script>
+import Empty from "@/components/Empty";
+
 export default {
+  components: {
+    Empty
+  },
   props: {
     topicList: Array
   }

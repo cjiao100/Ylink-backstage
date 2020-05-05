@@ -2,11 +2,13 @@ import {
   GET_POST_LIST,
   GET_HOT_POST,
   GET_HOT_TOPIC,
+  GET_REPORT_LIST,
   GET_NEW_POST_PER_DAY,
   GET_NEW_TOPIC_PER_DAY
 } from "@/store/mutation-types";
 import {
   GetPostList,
+  GetReportList,
   GetHotPostList,
   GetHotTopicList,
   GetNewPostPerDay,
@@ -16,9 +18,10 @@ import moment from "moment";
 
 const Post = {
   state: {
-    list: [],
     hot: [],
+    list: [],
     topic: [],
+    report: [],
     postPerDay: [],
     topicPerDay: []
   },
@@ -38,6 +41,9 @@ const Post = {
     },
     [GET_NEW_TOPIC_PER_DAY](state, payload) {
       state.topicPerDay = payload;
+    },
+    [GET_REPORT_LIST](state, payload) {
+      state.report = payload;
     }
   },
 
@@ -61,6 +67,10 @@ const Post = {
     async getNewTopicDateInSevenDay({ commit }) {
       const topicPerDay = await GetNewTopicPerDay();
       commit(GET_NEW_TOPIC_PER_DAY, topicPerDay);
+    },
+    async getReportList({ commit }) {
+      const report = await GetReportList();
+      commit(GET_REPORT_LIST, report);
     }
   },
 
@@ -93,6 +103,13 @@ const Post = {
           post: item.postList.length
         }
       }));
+    },
+    reportList({ report }) {
+      return report.map(item => {
+        const post = item.post;
+        post.todo = item._id;
+        return post;
+      });
     },
     post({ postPerDay }) {
       return postPerDay;
