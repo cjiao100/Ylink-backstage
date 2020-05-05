@@ -126,7 +126,7 @@ export default {
       if (!data.content) {
         return "内容不能为空";
       }
-      if (!data.coverImg) {
+      if (!data.coverImage) {
         return "封面不能为空";
       }
 
