@@ -4,7 +4,7 @@
       <el-button type="primary" size="small">
         <router-link to="/content/article/create">新增文章</router-link>
       </el-button>
-      <filter-component class="filter-content" />
+      <!-- <filter-component class="filter-content" /> -->
     </div>
     <el-table :data="articleList" style="width: 100%">
       <el-table-column align="center" type="index" width="100" />

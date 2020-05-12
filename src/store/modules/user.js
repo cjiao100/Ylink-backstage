@@ -42,16 +42,16 @@ const User = {
         created_at: moment(item.created_at || item.createDate).format(
           "YYYY-MM-DD"
         ),
-        lastDate: moment(item.lastDate).fromNow()
+        lastDate: moment(item.last_login).fromNow()
       }));
     },
     activeUser({ list }) {
       return {
         active: list.filter(item =>
-          moment(moment().weekday(0)).isBefore(item.lastDate)
+          moment(moment().weekday(0)).isBefore(item.last_login)
         ).length,
         other: list.filter(item =>
-          moment(moment().weekday(0)).isAfter(item.lastDate)
+          moment(moment().weekday(0)).isAfter(item.last_login)
         ).length,
         total: list.length
       };

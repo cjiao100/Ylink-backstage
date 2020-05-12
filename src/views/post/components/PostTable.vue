@@ -2,7 +2,7 @@
   <el-card shadow="nerver" class="container">
     <div slot="header" class="card-header">
       <span>帖子列表</span>
-      <filter-component class="filter-content" />
+      <!-- <filter-component class="filter-content" /> -->
     </div>
     <el-table :data="postList" style="width: 100%">
       <el-table-column type="index" width="100" />

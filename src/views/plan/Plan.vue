@@ -1,6 +1,6 @@
 <template>
   <el-card class="plan" shadow="never">
-    <el-row type="flex">
+    <el-row type="flex" style="min-height: 500px;">
       <el-col :span="2" class="menu">
         <el-button type="primary" size="small" @click="openCreatePlanDialog">
           新增计划
@@ -20,26 +20,29 @@
         </el-menu>
       </el-col>
       <el-col :span="11" class="config">
-        <div class="config-header">
-          <h2>{{ currentPlan.name }}</h2>
-          <el-button
-            type="danger"
-            size="small"
-            class="config-button"
-            @click="deletePlanById"
-          >
-            删除计划
-          </el-button>
-        </div>
-        <el-transfer
-          class="transfer"
-          v-model="wordListOnPlan"
-          :data="wordListOutPlan"
-          :titles="['未加入计划', '计划中']"
-          target-order="unshift"
-          @change="wordListChange"
-          filterable
-        ></el-transfer>
+        <template v-if="planList.length">
+          <div class="config-header">
+            <h2>{{ currentPlan.name }}</h2>
+            <el-button
+              type="danger"
+              size="small"
+              class="config-button"
+              @click="deletePlanById"
+            >
+              删除计划
+            </el-button>
+          </div>
+          <el-transfer
+            class="transfer"
+            v-model="wordListOnPlan"
+            :data="wordListOutPlan"
+            :titles="['未加入计划', '计划中']"
+            target-order="unshift"
+            @change="wordListChange"
+            filterable
+          ></el-transfer>
+        </template>
+        <empty v-else />
       </el-col>
       <el-col :span="11" class="search">
         <div class="input">
@@ -78,10 +81,12 @@
 import { mapGetters, mapActions } from "vuex";
 import { DeletePlan } from "@/api/plan";
 import CreatePlan from "./CreatePlan";
+import Empty from "@/components/Empty";
 
 export default {
   components: {
-    CreatePlan
+    CreatePlan,
+    Empty
   },
   data() {
     return {
@@ -107,6 +112,7 @@ export default {
       "translate"
     ]),
     selectPlan(index) {
+      this.getWordList();
       this.getWordListByPlanId(index);
       this.currentPlan = {
         name: this.$store.getters.currentPlanName(index),
@@ -152,7 +158,7 @@ export default {
     },
     async deletePlanById() {
       const result = await DeletePlan(this.currentPlan.id);
-      console.log(result);
+
       if (result) {
         this.$message("删除成功");
         this.getPlanList();
@@ -172,9 +178,11 @@ export default {
       this.wordListOutPlan = newVal;
     },
     planList(newVal) {
-      this.currentPlan = newVal[0];
-      this.defaultPlanId = newVal[0].id;
-      this.getWordListByPlanId(this.defaultPlanId);
+      if (newVal.length !== 0) {
+        this.currentPlan = newVal[0];
+        this.defaultPlanId = newVal[0].id;
+        this.getWordListByPlanId(this.defaultPlanId);
+      }
     }
   }
 };
@@ -199,6 +207,7 @@ export default {
     flex-direction: column;
     align-items: center;
     border-right: solid 1px #e6e6e6;
+    justify-content: center;
 
     .transfer {
       text-align: left;

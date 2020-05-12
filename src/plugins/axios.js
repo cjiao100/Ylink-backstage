@@ -8,7 +8,7 @@ const { BASE_URL } = process.env;
 
 // Full config:  https://github.com/axios/axios#request-config
 // axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || '';
-axios.defaults.headers.common["Authorization"] = localStorage.getItem("token");
+// axios.defaults.headers.common["Authorization"] = localStorage.getItem("token");
 axios.defaults.headers.post["Content-Type"] =
   "application/x-www-form-urlencoded";
 // axios.defaults.transformRequest = data => {
@@ -54,6 +54,7 @@ const _axios = axios.create(config);
 _axios.interceptors.request.use(
   function(config) {
     // Do something before request is sent
+    config.headers.Authorization = localStorage.getItem("token");
     return config;
   },
   function(error) {
