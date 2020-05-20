@@ -1,6 +1,7 @@
 <template>
   <!-- <div :class="className" :style="{ height: height, width: width }" /> -->
   <ve-line
+    v-if="show"
     :data="chartData"
     :settings="chartSettings"
     :extend="extend"
@@ -10,29 +11,22 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
+      show: false,
       className: "chart",
       height: "350px",
       width: "100%",
       chart: null,
       chartData: {
-        columns: ["时间", "当前在线人数"],
-        rows: [
-          { 时间: "6:30", 当前在线人数: "120" },
-          { 时间: "7:00", 当前在线人数: "82" },
-          { 时间: "7:30", 当前在线人数: "91" },
-          { 时间: "8:00", 当前在线人数: "154" },
-          { 时间: "8:30", 当前在线人数: "162" },
-          { 时间: "9:00", 当前在线人数: "140" },
-          { 时间: "9:30", 当前在线人数: "145" },
-          { 时间: "10:00", 当前在线人数: "120" },
-          { 时间: "10:30", 当前在线人数: "82" },
-          { 时间: "11:00", 当前在线人数: "91" }
-        ]
+        columns: ["date", "online"],
+        rows: this.online
       },
       chartSettings: {
+        labelMap: { date: "时间", online: "当前在线人数" },
         area: true,
         itemStyle: {
           normal: {
@@ -99,7 +93,19 @@ export default {
         }
       }
     };
+  },
+  computed: {
+    ...mapGetters(["online"])
+  },
+  watch: {
+    online(newVal) {
+      this.show = true;
+      this.chartData.rows = newVal;
+    }
   }
+  // updated() {
+  //   console.log(this.chartData);
+  // }
 };
 </script>
 

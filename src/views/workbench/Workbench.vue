@@ -95,7 +95,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import LineChart from "./components/LineChart";
 import List from "./components/List";
 import Todo from "./components/Todo";
@@ -117,9 +117,18 @@ export default {
     };
   },
   mounted() {
-    this.$store.dispatch("loadWeekData");
-    this.$store.dispatch("getHotPostList");
-    this.$store.dispatch("getHotArticleList");
+    this.loadWeekData();
+    this.getHotPostList();
+    this.getHotArticleList();
+    this.loadOnlineUser();
+  },
+  methods: {
+    ...mapActions([
+      "loadWeekData",
+      "getHotPostList",
+      "getHotArticleList",
+      "loadOnlineUser"
+    ])
   },
   computed: {
     ...mapGetters(["week"])

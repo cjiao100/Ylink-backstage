@@ -26,12 +26,12 @@
 </template>
 
 <script>
-import FilterComponent from "@/components/Filter.vue";
+// import FilterComponent from "@/components/Filter.vue";
 
 export default {
-  components: {
-    FilterComponent
-  },
+  // components: {
+  //   FilterComponent
+  // },
   props: {
     postList: Array
   }

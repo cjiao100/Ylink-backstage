@@ -1,15 +1,23 @@
 import {
   LOAD_WEEK_DATA,
   GET_TODO_LIST,
-  CREATE_NEW_TODO
+  CREATE_NEW_TODO,
+  LOAD_ONLINE_USER
 } from "@/store/mutation-types";
-import { AddTodo, GetTodoList, GetDataOfWeek } from "@/api/workbench";
+import {
+  AddTodo,
+  GetTodoList,
+  GetDataOfWeek,
+  GetOnlineUser
+} from "@/api/workbench";
+import moment from "moment";
 
 const User = {
   state: {
     week: {},
     todoList: [],
-    todo: {}
+    todo: {},
+    online: []
   },
   mutations: {
     [LOAD_WEEK_DATA](state, week) {
@@ -21,6 +29,9 @@ const User = {
     },
     [CREATE_NEW_TODO](state, payload) {
       state.todo = payload;
+    },
+    [LOAD_ONLINE_USER](state, payload) {
+      state.online = payload;
     }
   },
 
@@ -42,6 +53,10 @@ const User = {
     async getTodoList({ commit }) {
       const list = await GetTodoList();
       commit(GET_TODO_LIST, list);
+    },
+    async loadOnlineUser({ commit }) {
+      const online = await GetOnlineUser();
+      commit(LOAD_ONLINE_USER, online);
     }
   },
 
@@ -51,6 +66,15 @@ const User = {
     },
     todoList({ todoList }) {
       return todoList;
+    },
+    online({ online }) {
+      return (
+        online &&
+        online.map(item => ({
+          date: moment(item.date).format("HH:mm"),
+          online: item.online
+        }))
+      );
     }
   }
 };

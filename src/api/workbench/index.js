@@ -17,3 +17,5 @@ export const CompleteTodo = todoId => Put(`${ADMIN_URL}${TODO_URL}/${todoId}`);
 
 export const PassReport = todoId =>
   Delete(`${ADMIN_URL}${TODO_URL}/report/${todoId}`);
+
+export const GetOnlineUser = () => Get(`${ADMIN_URL}/online/`);

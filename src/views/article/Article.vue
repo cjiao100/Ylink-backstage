@@ -34,12 +34,12 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import FilterComponent from "@/components/Filter.vue";
+// import FilterComponent from "@/components/Filter.vue";
 
 export default {
-  components: {
-    FilterComponent
-  },
+  // components: {
+  //   FilterComponent
+  // },
   computed: {
     ...mapGetters(["articleList"])
   },
