@@ -46,28 +46,28 @@ export default {
   data() {
     return {
       applyList: [
-        {
-          id: 1,
-          user: {
-            name: "程俊伟",
-            school: "山西农业大学信息学院",
-            header_url:
-              "https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
-          },
-          message: "认证校园帐号",
-          createData: "2020/03/03 23:56"
-        },
-        {
-          id: 2,
-          user: {
-            name: "程俊伟",
-            school: "山西农业大学信息学院",
-            header_url:
-              "https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
-          },
-          message: "认证校园帐号",
-          createData: "2020/03/03 23:56"
-        }
+        // {
+        //   id: 1,
+        //   user: {
+        //     name: "程俊伟",
+        //     school: "山西农业大学信息学院",
+        //     header_url:
+        //       "https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
+        //   },
+        //   message: "认证校园帐号",
+        //   createData: "2020/03/03 23:56"
+        // },
+        // {
+        //   id: 2,
+        //   user: {
+        //     name: "程俊伟",
+        //     school: "山西农业大学信息学院",
+        //     header_url:
+        //       "https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
+        //   },
+        //   message: "认证校园帐号",
+        //   createData: "2020/03/03 23:56"
+        // }
       ]
     };
   }
