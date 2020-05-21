@@ -82,12 +82,16 @@ export default {
         yAxis: {
           axisTick: {
             show: false
-          }
+          },
+          splitNumber: 5,
+          minInterVal: 0,
+          min: 0
         },
         series(v) {
           v.forEach(i => {
             i.animationDuration = 2800;
             i.animationEasing = "quadraticOut";
+            i.clip = false;
           });
           return v;
         }
