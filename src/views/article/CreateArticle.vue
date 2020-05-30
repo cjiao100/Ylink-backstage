@@ -144,6 +144,11 @@ export default {
       } else {
         const article = await PostArticle(params);
         console.log(article);
+        this.$router.push("./content/article");
+        this.$message({
+          message: "发表成功",
+          type: "success"
+        });
       }
     }
   }

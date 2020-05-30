@@ -72,7 +72,7 @@ const User = {
         online &&
         online
           .map(item => ({
-            date: moment(item.date).format("DD-HH:mm"),
+            date: moment(item.date).format("HH:mm"),
             online: item.online
           }))
           .sort((a, b) => {

@@ -39,10 +39,10 @@
         </template>
       </el-menu-item>
     </el-submenu>
-    <el-menu-item index="/space">
+    <!-- <el-menu-item index="/space">
       <i class="el-icon-s-custom"></i>
       <span slot="title">个人空间</span>
-    </el-menu-item>
+    </el-menu-item> -->
   </el-menu>
 </template>
 

@@ -64,8 +64,16 @@ export default {
         const result = await login(this.loginForm);
         localStorage.setItem("token", result.access_token);
         this.$router.push("/");
+        this.$message({
+          message: "登录成功",
+          type: "success"
+        });
       } catch (error) {
         console.warn(error);
+        this.$message({
+          message: "登录失败",
+          type: "error"
+        });
       }
     }
   }
